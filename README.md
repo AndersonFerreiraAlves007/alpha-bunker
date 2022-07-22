@@ -28,7 +28,7 @@
 
 Escopo
 
-    Desenvolver um pequeno sistema bancário em typescript que contenha tanto backend (escrito em nodejs utilizando express) e frontend (escrito em reactjs). A aplicação deve permitir operações básicas como criar transferências, depósitos, saques, criação de conta e visualização do extrato da conta.
+Desenvolver um pequeno sistema bancário em typescript que contenha tanto backend (escrito em nodejs utilizando express) e frontend (escrito em reactjs). A aplicação deve permitir operações básicas como criar transferências, depósitos, saques, criação de conta e visualização do extrato da conta.
 
 ---
 <h2 align="center">Tecnologias utilizadas</h2>
