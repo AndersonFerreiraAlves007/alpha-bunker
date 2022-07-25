@@ -2,6 +2,7 @@ export interface InputProps {
   name: string;
   type: string;
   value: string;
+  placeholder: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -21,6 +22,11 @@ export interface RegisterFormProps {
   confirmPassword: string;
   birthdate: string;
   cpf: string;
+}
+
+export interface LoginFormProps {
+  cpf: string;
+  password: string;
 }
 
 export interface ErrorsRegister {

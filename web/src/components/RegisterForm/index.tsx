@@ -26,7 +26,7 @@ const ControlledRegisterForm = () => {
       value: formValues.name,
       onChange: handleChange,
       label: 'Nome',
-      placeholder: 'Nome',
+      placeholder: 'Digite seu Nome',
     },
     {
       name: 'email',
@@ -34,7 +34,7 @@ const ControlledRegisterForm = () => {
       value: formValues.email,
       onChange: handleChange,
       label: 'Email',
-      placeholder: 'Email',
+      placeholder: 'Digite seu Email',
     },
     {
       name: 'birthdate',
@@ -49,7 +49,7 @@ const ControlledRegisterForm = () => {
       type: 'text',
       value: formValues.cpf,
       onChange: handleChange,
-      label: 'CPF',
+      label: 'Digite seu CPF',
       placeholder: 'CPF',
     },
     {
@@ -57,7 +57,7 @@ const ControlledRegisterForm = () => {
       type: 'password',
       value: formValues.password,
       onChange: handleChange,
-      label: 'Senha',
+      label: 'Digite sua Senha',
       placeholder: 'Senha',
     },
     {
@@ -65,7 +65,7 @@ const ControlledRegisterForm = () => {
       type: 'password',
       value: formValues.confirmPassword,
       onChange: handleChange,
-      label: 'Confirmar senha',
+      label: 'Confirmae sua senha',
       placeholder: 'Confirmar senha',
     },
   ];
