@@ -1,11 +1,14 @@
 import React from 'react';
 import './styles/global.css';
+import ControlledLoginForm from './components/LoginForm';
+import ControlledRegisterForm from './components/RegisterForm';
 
 function App() {
-
   return (
-    <div >
-
+    <div>
+      <ControlledLoginForm />
+      <br/>
+      <ControlledRegisterForm />
     </div>
   );
 }
