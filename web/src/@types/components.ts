@@ -1,8 +1,11 @@
+import { ButtonHTMLAttributes, DetailedHTMLProps, MouseEventHandler } from 'react';
+
 export interface InputProps {
   name: string;
   type: string;
   value: string;
-  placeholder: string;
+  errorMessage: string;
+  inputClassName: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -36,4 +39,17 @@ export interface ErrorsRegister {
   confirmPassword: string;
   birthdate: string;
   cpf: string;
+}
+
+export interface PersonalDataTypes {
+  name: string;
+  birthdate: string;
+  cpf: string;
+}
+
+export interface ButtonTypes {
+  children: string;
+  btnclass: string;
+  handleClick: MouseEventHandler<HTMLButtonElement>;
+  type: 'button' | 'submit';
 }

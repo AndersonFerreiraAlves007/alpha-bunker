@@ -4,7 +4,8 @@ import CustomForm from '../CustomForm';
 import { loginDataValidator } from '../../utils/login-form.validator';
 
 const ControlledLoginForm = () => {
-  const [formValues, setFormValues] = useState({cpf: '', password: ''});
+  const [formValues, setFormValues] = useState({ cpf: '', password: '' });
+  const [errorMessages, setErrorMessages] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -17,6 +18,8 @@ const ControlledLoginForm = () => {
       value: formValues.cpf,
       placeholder: 'Digite seu CPF',
       onChange: handleChange,
+      inputClassName: 'base',
+      errorMessage: '',
     },
     {
       name: 'password',
@@ -24,14 +27,27 @@ const ControlledLoginForm = () => {
       value: formValues.password,
       placeholder: 'Digite sua senha',
       onChange: handleChange,
+      inputClassName: 'base',
+      errorMessage: '',
     },
   ];
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    setErrorMessages(false);
     const errors = loginDataValidator(formValues);
     if (Object.values(errors).some((error) => error)) {
-      console.log(errors);
+      setErrorMessages(true);
+      Object.values(errors).some((error) => {
+        if (error) {
+          formInputs.forEach((input) => {
+            if (input.name === errors.name) {
+              input.errorMessage = error;
+            }
+            });
+          return true;
+        }})
+        console.log(formInputs);
     }
     console.log('Logado com sucesso!');
   };

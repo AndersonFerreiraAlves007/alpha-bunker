@@ -1,25 +1,51 @@
 import React from 'react';
 import { InputProps } from '../../@types/components';
 
-const Input: React.FC<InputProps> = (props) => {
-  const { name, type, value, onChange, placeholder } = props;
+export const INPUT_TYPE_CLASSES = {
+  base: 'base',
+  error: 'error',
+}
 
+const base = {
+  input: "block px-2.5 pb-2.5 pt-4 w-full text-sm text-[#353535]  bg-transparent rounded-lg border-2\
+  border-[#d2d2d2] appearance-none dark:text-white dark:border-gray-600 dark:focus:border-[#3FA7B8] focus:outline-none focus:ring-0 focus:border-[#3FA7B8] peer",
+  label: "absolute text-sm text-[#353535] dark:text-gray-400 duration-300 transform:-translate-y-4 transform:scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-[#338896] peer-focus:dark:text-[353535] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1",
+  span: "block w-full invisible"
+}
+
+const error = {
+  input: "block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-2\
+   appearance-none dark:text-white dark:border-[#FF5959] border-[#E24B2D] dark:focus:border-red-500\
+    focus:outline-none focus:ring-0 focus:border-[#FF5959] peer",
+  label: "absolute text-sm text-[#FF5959] dark:text-[#FF5959] duration-300 transform:-translate-y-4 transform:scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1",
+  span: "block w-full invisible text-[#FF5959]"
+}
+
+const getInputClasses = (inputClassName = INPUT_TYPE_CLASSES.base) => ({
+  [INPUT_TYPE_CLASSES.base]: base,
+  [INPUT_TYPE_CLASSES.error]: error,
+}[inputClassName]);
+
+const Input: React.FC<InputProps> = (props) => {
+  const { name, type, value, onChange, inputClassName, errorMessage } = props;
+  const inputClasses = getInputClasses(inputClassName);
   return (
-    <div>
+    <div className="relative">
       <input
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className={inputClasses.input}
+        id={name}
         name={name}
         type={type}
         value={value}
         onChange={onChange}
-        placeholder={placeholder}
+        placeholder=""
       />
+      <label htmlFor={name} className={inputClasses.label}>
+        {name}
+      </label>
+      <span>{errorMessage}</span>
     </div>
   );
 };
 
 export default Input;
-
-/*
-"border-box m-0 border-1 border-slate-300 rounded w-full transition: border 0.2s box-shadow 0.2s pt-3 px-3 pb-2 before: mr-1 border-l-1-transparent "
-*/

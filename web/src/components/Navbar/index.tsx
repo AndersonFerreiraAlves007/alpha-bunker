@@ -3,7 +3,7 @@ import { ArrowsLeftRight } from 'phosphor-react';
 import { DownloadSimple } from 'phosphor-react';
 import { UploadSimple } from 'phosphor-react';
 
-const Navbar = () => {
+const Navbar:React.FC = () => {
   return (
     <nav className="navbar flex gap-x-2.5 w-71">
       <div className="flex flex-col justify-center items-center">
