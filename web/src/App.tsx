@@ -1,13 +1,16 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
+import { UserProvider } from './providers/UserProvider';
+import { Router } from './routes';
 import './styles/global.css';
 
-function App() {
-
+export const App = () => {
   return (
-    <div >
-
-    </div>
+    <UserProvider>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </UserProvider>
   );
-}
-
-export default App;
+};
