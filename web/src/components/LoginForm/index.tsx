@@ -1,14 +1,20 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CustomForm from '../CustomForm';
 import { loginDataValidator } from '../../utils/login-form.validator';
+import { INPUT_TYPE_CLASSES } from '../Input';
 
 const ControlledLoginForm = () => {
   const [formValues, setFormValues] = useState({ cpf: '', password: '' });
-  const [errorMessages, setErrorMessages] = useState(false);
-
+  const [inputClass, setInputClass] = useState({
+    cpf: INPUT_TYPE_CLASSES.base,
+    password: INPUT_TYPE_CLASSES.base,
+  });
+  const [errorMessage, setErrorMessage] = useState({ cpf: '', password: '' });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    setInputClass({ ...inputClass, [name]: INPUT_TYPE_CLASSES.base });
+    setErrorMessage({ ...errorMessage, [name]: '' });
     setFormValues({ ...formValues, [name]: value });
   };
   const formInputs = [
@@ -18,8 +24,8 @@ const ControlledLoginForm = () => {
       value: formValues.cpf,
       placeholder: 'Digite seu CPF',
       onChange: handleChange,
-      inputClassName: 'base',
-      errorMessage: '',
+      inputClassName: inputClass.cpf,
+      errorMessage: errorMessage.cpf,
     },
     {
       name: 'password',
@@ -27,29 +33,24 @@ const ControlledLoginForm = () => {
       value: formValues.password,
       placeholder: 'Digite sua senha',
       onChange: handleChange,
-      inputClassName: 'base',
-      errorMessage: '',
+      inputClassName: inputClass.password,
+      errorMessage: errorMessage.password,
     },
   ];
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    setErrorMessages(false);
+
     const errors = loginDataValidator(formValues);
     if (Object.values(errors).some((error) => error)) {
-      setErrorMessages(true);
-      Object.values(errors).some((error) => {
-        if (error) {
-          formInputs.forEach((input) => {
-            if (input.name === errors.name) {
-              input.errorMessage = error;
-            }
-            });
-          return true;
-        }})
-        console.log(formInputs);
+      Object.entries(errors).forEach(([key, value]) => {
+        if (value !== '') {
+          setFormValues({ ...formValues, [key]: '' });
+          setErrorMessage({...errorMessage, [key]: value.split('|')[0]});
+          setInputClass({...inputClass, [key] : INPUT_TYPE_CLASSES.error});
+        }
+      });
     }
-    console.log('Logado com sucesso!');
   };
 
   return (

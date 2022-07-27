@@ -18,7 +18,7 @@ const error = {
    appearance-none dark:text-white dark:border-[#FF5959] border-[#E24B2D] dark:focus:border-red-500\
     focus:outline-none focus:ring-0 focus:border-[#FF5959] peer",
   label: "absolute text-sm text-[#FF5959] dark:text-[#FF5959] duration-300 transform:-translate-y-4 transform:scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1",
-  span: "block w-full invisible text-[#FF5959]"
+  span: "block w-full text-[#FF5959] text-[11px]"
 }
 
 const getInputClasses = (inputClassName = INPUT_TYPE_CLASSES.base) => ({
