@@ -6,6 +6,7 @@ import FormTransfer from '.';
 export default {
   title: 'FormTransfer',
   component: FormTransfer,
+  argTypes: { handleTransfer: { action: 'clicked' } },
 } as ComponentMeta<typeof FormTransfer>;
 
 const Template: ComponentStory<typeof FormTransfer> = (args) => <FormTransfer {...args} />;
@@ -13,6 +14,8 @@ const Template: ComponentStory<typeof FormTransfer> = (args) => <FormTransfer {.
 export const Primary = Template.bind({});
 
 Primary.args = {
-  primary: true,
-  label: 'FormTransfer',
+  accountNumberOrigin: '1212122',
+  agencyOrigin: '1212',
+  digitAccountVOrigin: '1',
+  digitAgencyVOrigin: '2'
 };

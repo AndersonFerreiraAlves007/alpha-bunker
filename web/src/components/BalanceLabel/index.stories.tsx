@@ -13,6 +13,9 @@ const Template: ComponentStory<typeof BalanceLabel> = (args) => <BalanceLabel {.
 export const Primary = Template.bind({});
 
 Primary.args = {
-  primary: true,
-  label: 'BalanceLabel',
+  accountNumber: '1212122',
+  agency: '1212',
+  digitAccountV: '1',
+  digitAgencyV: '2',
+  balance: 0
 };
