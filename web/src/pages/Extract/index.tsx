@@ -2,17 +2,14 @@ import React, { useState } from 'react';
 import { Button } from '../../components/Button';
 import { Modal } from '../../components/ModalConfirmTransaction';
 import { api } from '../../libs/api';
+import BalanceLabel from '@/components/BalanceLabel'
+import Navbar from '@/components/Navbar'
+import ListTransactionsExtract from '@/components/ListTransactionsExtract'
 
-export const Extract = () => {
-  const [modal, setModal] = useState(false);
-
+export const MakeDeposit = () => {
   async function handleDeposit() {
     try {
-      const result = await api.post('deposit', {
-        agency: '',
-        account: '',
-        value: '',
-      });
+      // fazer request
     } catch (error) {
       console.log(error);
     }
@@ -20,30 +17,9 @@ export const Extract = () => {
 
   return (
     <>
-      {modal && (
-        <Modal
-          title="Depósito"
-          setModal={setModal}
-          handleConfirmModal={handleDeposit}
-        />
-      )}
-      <div className="flex flex-col gap-5">
-        <Button
-          category="primary"
-          label="Abrir modal"
-          onClick={() => setModal(true)}
-        />
-        <Button
-          category="secondary"
-          label="Abrir modal"
-          onClick={() => setModal(true)}
-        />
-        <Button
-          category="cancel"
-          label="Abrir modal"
-          onClick={() => setModal(true)}
-        />
-      </div>
+      <Navbar/>
+      <BalanceLabel accountNumber='' agency='' balance={0} digitAccountV="" digitAgencyV=''/>
+      <ListTransactionsExtract daysTransactions={[]}/>
     </>
   );
 };

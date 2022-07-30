@@ -2,17 +2,16 @@ import React, { useState } from 'react';
 import { Button } from '../../components/Button';
 import { Modal } from '../../components/ModalConfirmTransaction';
 import { api } from '../../libs/api';
+import BalanceLabel from '@/components/BalanceLabel'
+import Navbar from '@/components/Navbar'
+import FormTransfer from '@/components/FormTransfer'
 
 export const MakeTransfer = () => {
   const [modal, setModal] = useState(false);
 
   async function handleDeposit() {
     try {
-      const result = await api.post('deposit', {
-        agency: '',
-        account: '',
-        value: '',
-      });
+      // fazer request
     } catch (error) {
       console.log(error);
     }
@@ -20,6 +19,15 @@ export const MakeTransfer = () => {
 
   return (
     <>
+      <Navbar/>
+      <BalanceLabel accountNumber='' agency='' balance={0} digitAccountV="" digitAgencyV=''/>
+      <FormTransfer
+        accountNumberOrigin=''
+        agencyOrigin=''
+        digitAccountVOrigin=''
+        digitAgencyVOrigin=''
+        handleTransfer={() => {}}
+      />
       {modal && (
         <Modal
           title="Depósito"
@@ -27,23 +35,6 @@ export const MakeTransfer = () => {
           handleConfirmModal={handleDeposit}
         />
       )}
-      <div className="flex flex-col gap-5">
-        <Button
-          category="primary"
-          label="Abrir modal"
-          onClick={() => setModal(true)}
-        />
-        <Button
-          category="secondary"
-          label="Abrir modal"
-          onClick={() => setModal(true)}
-        />
-        <Button
-          category="cancel"
-          label="Abrir modal"
-          onClick={() => setModal(true)}
-        />
-      </div>
     </>
   );
 };

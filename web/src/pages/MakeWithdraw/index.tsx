@@ -2,17 +2,15 @@ import React, { useState } from 'react';
 import { Button } from '../../components/Button';
 import { Modal } from '../../components/ModalConfirmTransaction';
 import { api } from '../../libs/api';
+import BalanceLabel from '@/components/BalanceLabel'
+import Navbar from '@/components/Navbar'
 
 export const MakeWithdraw = () => {
   const [modal, setModal] = useState(false);
 
   async function handleDeposit() {
     try {
-      const result = await api.post('deposit', {
-        agency: '',
-        account: '',
-        value: '',
-      });
+      // fazer request
     } catch (error) {
       console.log(error);
     }
@@ -20,6 +18,8 @@ export const MakeWithdraw = () => {
 
   return (
     <>
+      <Navbar/>
+      <BalanceLabel accountNumber='' agency='' balance={0} digitAccountV="" digitAgencyV=''/>
       {modal && (
         <Modal
           title="Depósito"
@@ -27,23 +27,6 @@ export const MakeWithdraw = () => {
           handleConfirmModal={handleDeposit}
         />
       )}
-      <div className="flex flex-col gap-5">
-        <Button
-          category="primary"
-          label="Abrir modal"
-          onClick={() => setModal(true)}
-        />
-        <Button
-          category="secondary"
-          label="Abrir modal"
-          onClick={() => setModal(true)}
-        />
-        <Button
-          category="cancel"
-          label="Abrir modal"
-          onClick={() => setModal(true)}
-        />
-      </div>
     </>
   );
 };
