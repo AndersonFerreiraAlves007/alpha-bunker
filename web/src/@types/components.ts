@@ -1,6 +1,7 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps, MouseEventHandler } from 'react';
 
 export interface InputProps {
+<<<<<<< HEAD
   name?: string;
   type?: string;
   value?: string;
@@ -8,6 +9,15 @@ export interface InputProps {
   placeholder?: string;
   inputClassName?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+=======
+  name: string;
+  type: string;
+  value: string;
+  errorMessage: string;
+  inputClassName: string;
+  placeholder?: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+>>>>>>> 73593257c6ef6fbe7a835df1e172d05a8ecc1ad4
 }
 
 export interface FormProps {

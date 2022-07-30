@@ -1,8 +1,15 @@
-import React, { ReactNode, createContext, useState, useContext } from 'react';
+import React, {
+  ReactNode,
+  createContext,
+  useState,
+  useContext
+} from 'react';
 
 interface ContextTypes {
-  user: UserTypes;
+  user: UserTypes|null;
   loading: boolean;
+  setLoading: any;
+  setUser: any;
 }
 
 interface UserTypes {
@@ -19,11 +26,11 @@ interface UserProviderTypes {
 }
 
 export const UserProvider = ({ children }: UserProviderTypes) => {
-  const [user, setUser] = useState<UserTypes>({
-    name: 'string',
-    email: 'string',
-    cpf: 'string',
-    birthDate: 'string',
+  const [user, setUser] = useState<UserTypes|null>({
+    birthDate: '1999-22-2',
+    cpf: '',
+    email: '',
+    name: ''
   });
   const [loading, setLoading] = useState(true);
 
@@ -32,6 +39,8 @@ export const UserProvider = ({ children }: UserProviderTypes) => {
       value={{
         user,
         loading,
+        setLoading,
+        setUser
       }}
     >
       {children}

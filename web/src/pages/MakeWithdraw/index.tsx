@@ -5,6 +5,8 @@ import Input from '../../components/Input';
 import { Modal } from '../../components/ModalConfirmTransaction';
 import { api } from '../../libs/api';
 import { DownloadSimple  } from "phosphor-react"
+import Navbar from '@/components/Navbar';
+import BalanceLabel from '@/components/BalanceLabel';
 
 export const MakeWithdraw = () => {
   const [modal, setModal] = useState(false);
@@ -26,11 +28,7 @@ export const MakeWithdraw = () => {
 
   async function handleDeposit() {
     try {
-      const result = await api.post('deposit', {
-        agency: '',
-        account: '',
-        value: '',
-      });
+      // fazer request
     } catch (error) {
       console.log(error);
     }
@@ -38,6 +36,8 @@ export const MakeWithdraw = () => {
 
   return (
     <>
+      <Navbar/>
+      <BalanceLabel accountNumber='' agency='' balance={0} digitAccountV="" digitAgencyV=''/>
       {modal && (
         <Modal
           title="Depósito"

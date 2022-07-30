@@ -41,7 +41,7 @@ interface PropTypes {
   onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const Button = ({
+const Button = ({
   className,
   label,
   type = 'button',
@@ -56,3 +56,5 @@ export const Button = ({
     {label}
   </button>
 );
+
+export default Button
