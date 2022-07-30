@@ -1,21 +1,15 @@
 import React, { FC, useState } from 'react'
 import { ArrowsLeftRight } from "phosphor-react";
+import { useUser } from '../../providers/UserProvider'
 
 type FormTransferProps = {
-  agencyOrigin: string;
-  accountNumberOrigin: string;
-  digitAccountVOrigin: string;
-  digitAgencyVOrigin: string;
   handleTransfer: any;
 }
 
 const FormTransfer: FC<FormTransferProps> = ({
-  accountNumberOrigin,
-  agencyOrigin,
-  digitAccountVOrigin,
-  digitAgencyVOrigin,
   handleTransfer
 }) => {
+  const { user } = useUser()
   const [account, setAccount] = useState('')
   const [agency, setAgency] = useState('')
   const [value, setValue] = useState(0)
@@ -23,6 +17,7 @@ const FormTransfer: FC<FormTransferProps> = ({
 
   function validateAccount() {
     let error = ''
+    console.log(account)
     if(account.length !== 6) {
       error = 'A conta deve ter 6 dígitos.'
     }
@@ -31,7 +26,8 @@ const FormTransfer: FC<FormTransferProps> = ({
 
   function validateAgency() {
     let error = ''
-    if(account.length !== 5) {
+    console.log(agency)
+    if(agency.length !== 5) {
       error = 'A agência deve ter 5 dígitos.'
     }
     return error
@@ -76,6 +72,8 @@ const FormTransfer: FC<FormTransferProps> = ({
   const hasError = getHasError(erros)
 
   function handleSubmit() {
+    console.log('error')
+    console.log(erros)
     if(!hasError) {
       handleTransfer({
         password,
@@ -100,18 +98,23 @@ const FormTransfer: FC<FormTransferProps> = ({
 
   function clearAccount(account: string) {
     const text = account.replace(/\D/, '').trim()
-    if(text.length > 7) setAccount(text.substring(0, 7))
+    if(text.length > 6) setAccount(text.substring(0, 6))
     else setAccount(text)
   }
 
   function clearAgency(agency: string) {
     const text = agency.replace(/\D/, '').trim()
-    if(text.length > 5) setAgency(text.substring(0, 7))
+    if(text.length > 5) setAgency(text.substring(0, 5))
     else setAgency(text)
   }
 
   const agencyFormat = formatAgency(agency)
   const accountFormat = formatAccount(account)
+
+  const agencyOrigin = user ? user.account.agency : ''
+  const digitAgencyVOrigin = user ? user.account.digit_agency_v : ''
+  const accountNumberOrigin = user ? user.account.account_number : ''
+  const digitAccountVOrigin = user ? user.account.digit_account_v : ''
 
   return (
     <form className='flex flex-col'>
@@ -147,7 +150,7 @@ const FormTransfer: FC<FormTransferProps> = ({
       </div>
       <input type="text" placeholder='Valor' value={value} onChange={e => setValue(e.target.value)}/>
       <input type="text" placeholder='Senha' value={password} onChange={e => setPassword(e.target.value)}/>
-      <button disabled={hasError} type="button" onClick={handleSubmit}>Transferir</button>
+      <button /* disabled={hasError} */ type="button" onClick={handleSubmit}>Transferir</button>
     </form>
   )
 }

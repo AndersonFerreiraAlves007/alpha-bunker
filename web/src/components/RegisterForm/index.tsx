@@ -1,11 +1,15 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import CustomForm from '../CustomForm';
 import { RegisterFormProps } from '../../@types/components';
 import { dataValidators } from '../../utils/register-form.validator';
 import { INPUT_TYPE_CLASSES } from '../Input';
+import { createAccount } from '../../libs/api'
 
 const ControlledRegisterForm = () => {
+  const navigate = useNavigate();
+  const [changePage, setChangePage] = useState(false)
   const [formValues, setFormValues] = useState<RegisterFormProps>({
     name: '',
     birthdate: '',
@@ -37,6 +41,26 @@ const ControlledRegisterForm = () => {
     setErrorMessage({ ...errorMessage, [name]: '' });
     setFormValues({ ...formValues, [name]: value });
   };
+
+  async function handleCreateAccount() {
+    const {
+      account,
+      user
+    } = await createAccount({
+      birthdate: formValues.birthdate,
+      cpf: formValues.cpf,
+      email: formValues.email,
+      name: formValues.name,
+      password: formValues.password
+    })
+
+    navigate('/login', { replace: true })
+
+  }
+
+  useEffect(() => {
+    if(changePage) handleCreateAccount()
+  }, [changePage])
 
   const formInputs = [
     {
@@ -108,6 +132,8 @@ const ControlledRegisterForm = () => {
           setInputClass({...inputClass, [key] : INPUT_TYPE_CLASSES.error});
         }
       });
+    } else {
+      setChangePage(true)
     }
   };
 

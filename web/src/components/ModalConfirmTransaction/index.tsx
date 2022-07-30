@@ -51,16 +51,18 @@ export const Modal = ({ title, handleConfirmModal, setModal }: PropTypes) => {
         <div className="mb-5 flex justify-center gap-5">
           <Button
             type="button"
-            category="cancel"
-            label="Cancelar"
-            onClick={() => setModal(false)}
-          />
+            handleClick={() => setModal(false)}
+            btnclass="error"
+          >
+            Cancelar
+          </Button>
           <Button
             type="button"
-            category="primary"
-            label="Confirmar"
-            onClick={() => handleConfirmModal()}
-          />
+            handleClick={() => handleConfirmModal()}
+            btnclass="base"
+          >
+            Confirmar
+          </Button>
         </div>
       </div>
     </div>

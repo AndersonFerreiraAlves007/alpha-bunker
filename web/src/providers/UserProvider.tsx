@@ -2,7 +2,8 @@ import React, {
   ReactNode,
   createContext,
   useState,
-  useContext
+  useContext,
+  useEffect
 } from 'react';
 
 interface ContextTypes {
@@ -17,6 +18,15 @@ interface UserTypes {
   email: string;
   cpf: string;
   birthDate: string;
+  id: number;
+  account: {
+    id: number;
+    account_number: string;
+    agency: string;
+    digit_agency_v: string;
+    digit_account_v: string;
+    balance: number;
+  }
 }
 
 export const UserContext = createContext<Partial<ContextTypes>>({});
@@ -28,6 +38,11 @@ interface UserProviderTypes {
 export const UserProvider = ({ children }: UserProviderTypes) => {
   const [user, setUser] = useState<UserTypes|null>(null);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const text = localStorage.getItem('user')
+    setUser(text ? JSON.parse(text) : null)
+  }, [])
 
   return (
     <UserContext.Provider

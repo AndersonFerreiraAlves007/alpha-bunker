@@ -1,20 +1,32 @@
+import React from 'react'
 import { ArrowLeft } from 'phosphor-react';
+import { useUser } from '../../providers/UserProvider'
+import { Link } from "react-router-dom";
 
 const ProfileHeader = () => {
-  const data = {
+  const {
+    user
+  } = useUser()
+
+  const name = user ? user.name : ''
+
+  const src = 'https://avatars3.githubusercontent.com/u/527058?s=460&v=4'
+/*   const data = {
     name: 'Tiaguchi ',
     src: 'https://avatars3.githubusercontent.com/u/527058?s=460&v=4',
-  };
+  }; */
   return (
-    <div className="flex flex-col bg-[#337782] w-[360px] h-[207px] rounded-b-3xl justify-center items-center">
-      <div className="w-3/4">
-        <ArrowLeft color='white' size={32}/>
+    <div className="flex flex-col bg-[#337782] w-[360px] h-[207px] rounded-b-3xl items-center">
+      <div className="w-full mt-5 ml-2">
+        <Link to={'/extract'}>
+          <ArrowLeft color='white' size={21}/>
+        </Link>
       </div>
       <div className="profile-header__avatar">
-        <img src={data.src} className="w-[80px] h-[80px] rounded-full" />
+        <img src={src} className="w-[80px] h-[80px] rounded-full my-2.5" />
       </div>
-      <div className="profile-header__name">
-        <h1>{data.name}</h1>
+      <div className="flex w-full justify-center items">
+        <h1 className='' >{name}</h1>
       </div>
     </div>
   );

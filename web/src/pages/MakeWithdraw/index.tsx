@@ -4,6 +4,7 @@ import { Modal } from '../../components/ModalConfirmTransaction';
 import { api } from '../../libs/api';
 import BalanceLabel from '../../components/BalanceLabel'
 import Navbar from '../../components/Navbar'
+import AppHeader from '../../components/AppHeader'
 
 export const MakeWithdraw = () => {
   const [modal, setModal] = useState(false);
@@ -18,11 +19,12 @@ export const MakeWithdraw = () => {
 
   return (
     <>
+      <AppHeader/>
       <Navbar/>
-      <BalanceLabel accountNumber='' agency='' balance={0} digitAccountV="" digitAgencyV=''/>
+      <BalanceLabel />
       {modal && (
         <Modal
-          title="Depósito"
+          title="Saque"
           setModal={setModal}
           handleConfirmModal={handleDeposit}
         />

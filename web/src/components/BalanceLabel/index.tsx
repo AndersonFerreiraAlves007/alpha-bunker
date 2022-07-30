@@ -1,25 +1,26 @@
 import React, { FC } from 'react'
 import { CaretDown, Eye } from "phosphor-react";
+import { useUser } from '../../providers/UserProvider'
 
 type BalanceLabelProps = {
-  agency: string;
-  accountNumber: string;
-  digitAccountV: string;
-  digitAgencyV: string;
-  balance: number;
 }
 
 function formatBalance(value: number) {
   return `${value.toFixed(2)}`
 }
 
-const BalanceLabel: FC<BalanceLabelProps> = ({
-  accountNumber,
-  agency,
-  digitAccountV,
-  digitAgencyV,
-  balance
-}) => {
+const BalanceLabel: FC<BalanceLabelProps> = () => {
+  const { user } = useUser()
+
+  console.log('asasasas')
+  console.log(user)
+
+  const agency = user ? user.account.agency : ''
+  const digitAgencyV = user ? user.account.digit_agency_v : ''
+  const accountNumber = user ? user.account.account_number : ''
+  const digitAccountV = user ? user.account.digit_account_v : ''
+  const balance = user ? user.account.balance : 0
+
   return (
     <div>
       <div className='flex items-center'>

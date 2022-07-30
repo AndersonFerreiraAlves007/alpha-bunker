@@ -5,6 +5,7 @@ import { api } from '../../libs/api';
 import BalanceLabel from '../../components/BalanceLabel'
 import Navbar from '../../components/Navbar'
 import ListTransactionsExtract from '../../components/ListTransactionsExtract'
+import AppHeader from '../../components/AppHeader'
 
 export const Extract = () => {
   async function handleDeposit() {
@@ -17,8 +18,9 @@ export const Extract = () => {
 
   return (
     <>
+      <AppHeader/>
       <Navbar/>
-      <BalanceLabel accountNumber='' agency='' balance={0} digitAccountV="" digitAgencyV=''/>
+      <BalanceLabel />
       <ListTransactionsExtract daysTransactions={[]}/>
     </>
   );

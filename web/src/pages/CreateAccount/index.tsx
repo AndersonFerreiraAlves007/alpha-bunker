@@ -3,16 +3,13 @@ import Button from '../../components/Button';
 import { Modal } from '../../components/ModalConfirmTransaction';
 import { createAccount } from '../../libs/api';
 import RegisterForm from '../../components/RegisterForm'
-import logo from '../../assets/logo.svg'
+import { HomeHeader } from '../../components/HomeHeader'
 
 export const CreateAccount = () => {
 
   return (
     <>
-      <div>
-        <img src={logo} alt="logo" />
-        <h3>Alpha Bunker</h3>
-      </div>
+      <HomeHeader/>
       <RegisterForm></RegisterForm>
     </>
   );

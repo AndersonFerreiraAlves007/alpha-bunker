@@ -26,9 +26,9 @@ const CustomForm: React.FC<FormProps> = ({
           children={buttonText}
         />
       </form>
-      {/* <Link to={routeName}>
+      <Link to={routeName}>
         <h3>{linkTitle}</h3>
-      </Link> */}
+      </Link>
     </div>
   );
 };

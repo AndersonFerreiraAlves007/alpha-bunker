@@ -40,8 +40,8 @@ async function getExtract(data: IGetExtractRequest): Promise<IGetExtractResponse
 interface ICreateTransferRequest {
   value: number;
   type: string;
-  origin_account_id: string;
-  dest_account_id: string;
+  origin_account_id: number;
+  dest_account_id: number;
   dest_agency: string;
   dest_account_ver_code: string;
   dest_agency_ver_code: string;
@@ -51,7 +51,7 @@ interface ICreateTransferRequest {
 interface ICreateTransferResponse {
   description: string;
   value: number;
-  date: Date;
+  date: string;
   origin_account_id: number;
   dest_account_id: number;
   id: number;
@@ -61,7 +61,7 @@ async function createTransfer(data: ICreateTransferRequest): Promise<ICreateTran
   return {
     description: 'transfer',
     value: 12,
-    date: new Date(),
+    date: '22/02/2022',
     origin_account_id: 1,
     dest_account_id: 1,
     id: 1
@@ -80,7 +80,7 @@ export interface ICreateDepositRequest {
 export interface ICreateDepositResponse {
   description: string;
   value: number;
-  date: Date;
+  date: string;
   origin_account_id: number;
   dest_account_id: number;
   id: number;
@@ -90,7 +90,7 @@ async function createDeposit(data: ICreateDepositRequest): Promise<ICreateDeposi
   return {
     description: 'deposit',
     value: 12,
-    date: new Date(),
+    date: '22/02/2022',
     origin_account_id: 1,
     dest_account_id: 1,
     id: 1
@@ -109,7 +109,7 @@ export interface ICreateWithdrawRequest {
 export interface ICreateWithdrawResponse {
   description: string;
   value: number;
-  date: Date;
+  date: string;
   origin_account_id: number;
   dest_account_id: number;
   id: number;
@@ -119,7 +119,7 @@ async function createWithdraw(data: ICreateWithdrawRequest): Promise<ICreateWith
   return {
     description: 'withdraw',
     value: 12,
-    date: new Date(),
+    date: '22/02/2022',
     origin_account_id: 1,
     dest_account_id: 1,
     id: 2
@@ -136,7 +136,7 @@ interface IGetTransactionResponse {
   id: number;
   description: string;
   value: number;
-  date: Date;
+  date: string;
   origin_account_id: number;
   dest_account_id: number;
 }
@@ -146,7 +146,7 @@ async function getTransaction(id: number): Promise<IGetTransactionResponse> {
     id: 2,
     description: 'withdraw',
     value: 12,
-    date: new Date(),
+    date: '22/02/2022',
     origin_account_id: 1,
     dest_account_id: 1,
   }
@@ -162,7 +162,7 @@ interface IGetUserResponse {
   id: number;
   name: string;
   email: string;
-  birthdate: Date;
+  birthdate: string;
   cpf: string;
 }
 
@@ -171,7 +171,7 @@ async function getUser(data: IGetUserRequest): Promise<IGetUserResponse> {
     id: 1,
     name: 'Anderson',
     email: 'andersonamericasul07@gmail.com',
-    birthdate: new Date(),
+    birthdate: '18/12/1995',
     cpf: '10831989475',
   }
 }
