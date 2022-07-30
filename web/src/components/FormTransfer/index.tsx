@@ -23,8 +23,8 @@ const FormTransfer: FC<FormTransferProps> = ({
 
   function validateAccount() {
     let error = ''
-    if(account.length !== 7) {
-      error = 'A conta deve ter 7 dígitos.'
+    if(account.length !== 6) {
+      error = 'A conta deve ter 6 dígitos.'
     }
     return error
   }
@@ -89,8 +89,8 @@ const FormTransfer: FC<FormTransferProps> = ({
   }
 
   function formatAccount(account: string) {
-    if(account.length < 7) return account
-    return `${account.substring(0, 6)}-${account.substring(6, 7)}`
+    if(account.length < 6) return account
+    return `${account.substring(0, 5)}-${account.substring(5, 6)}`
   }
 
   function formatAgency(agency: string) {
@@ -114,14 +114,14 @@ const FormTransfer: FC<FormTransferProps> = ({
   const accountFormat = formatAccount(account)
 
   return (
-    <form>
-      <div>
+    <form className='flex flex-col'>
+      <div className='flex items-center'>
         <span><ArrowsLeftRight size={32} /></span>
         <span>Transferência</span>
       </div>
       <div>
         <h2>Origem</h2>
-        <div>
+        <div className='flex items-center'>
           <div>
             <input type="text" value={`${agencyOrigin}-${digitAgencyVOrigin}`} disabled/>
             <h3>Agência</h3>
@@ -134,7 +134,7 @@ const FormTransfer: FC<FormTransferProps> = ({
       </div>
       <div>
         <h2>Destino</h2>
-        <div>
+        <div className='flex items-center'>
           <div>
             <input type="text" value={agencyFormat} onChange={e => clearAgency(e.target.value)}/>
             <h3>Agência</h3>

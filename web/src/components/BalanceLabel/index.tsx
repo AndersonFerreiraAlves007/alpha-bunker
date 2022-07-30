@@ -22,12 +22,14 @@ const BalanceLabel: FC<BalanceLabelProps> = ({
 }) => {
   return (
     <div>
-      <div>
-        <span>{`Agência: ${agency}-${digitAgencyV}`}</span>
-        <span>{`Conta: ${accountNumber}-${digitAccountV}`}</span>
-        <span><CaretDown size={32} color="hotpink" weight="fill" /></span>
+      <div className='flex items-center'>
+        <div className='flex items-center'>
+          <span className='text-[#C98E26]'>{`Agência: ${agency}-${digitAgencyV}`}</span>
+          <span className='text-[#C98E26]'>{`Conta: ${accountNumber}-${digitAccountV}`}</span>
+        </div>
+        <span><CaretDown size={32} color="#777777" weight="fill" /></span>
       </div>
-      <div>
+      <div className='flex items-center'>
         <span><Eye size={32} /></span>
         <span>{formatBalance(balance)}</span>
         <span>R$</span>

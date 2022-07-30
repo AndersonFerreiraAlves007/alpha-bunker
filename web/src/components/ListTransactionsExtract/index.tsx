@@ -19,19 +19,19 @@ const DayTransactions: FC<DayTransactionsProps> = ({
           prefix: '+',
           color: '#53D496'
         }
-      case '':
+      case 'transfer':
         return {
           label: 'Transferência enviada',
           prefix: '-',
           color: '#FF5959'
         }
-      case '':
+      case 'withdraw':
         return {
           label: 'Saque',
           prefix: '-',
           color: '#FF5959'
         }
-      case '':
+      case 'transfer':
         return {
           label: 'Transferência recebida',
           prefix: '+',
@@ -56,9 +56,9 @@ const DayTransactions: FC<DayTransactionsProps> = ({
       <div>
         {transactions.map((item: any) => {
           const { color, label, prefix } = getLabelTransaction(item.type)
-          return <div>
+          return <div className='flex justify-between'>
             <span>{label}</span>
-            <span>{`${prefix === '-' ? '- ' : '+ '}${formatMoeda(item.value)}`}</span>
+            <span className={prefix === '-' ? 'text-[#FF5959]' : 'text-[#53D496]'}>{`${prefix === '-' ? '- ' : '+ '}${formatMoeda(item.value)}`}</span>
           </div>
       })}
       </div>
@@ -75,9 +75,11 @@ const ListTransactionsExtract: FC<ListTransactionsExtractProps> = ({
 }) => {
   return (
     <div>
-      <div>
-        <span><Bank size={32} /></span>
-        <span>Extrato de transações</span>
+      <div className='flex items-center'>
+        <div className='flex items-center'>
+          <span><Bank size={32} /></span>
+          <span>Extrato de transações</span>
+        </div>
         <span><Bell size={32} /></span>
       </div>
       {
