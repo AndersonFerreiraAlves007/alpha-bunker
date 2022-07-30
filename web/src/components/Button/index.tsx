@@ -1,4 +1,4 @@
-/* import { ButtonTypes } from '../../@types/components';
+import { ButtonTypes } from '../../@types/components';
 
 export const BUTTON_TYPES = {
   base: 'base',
@@ -30,8 +30,8 @@ const CustomButton: React.FC<ButtonTypes> = (props) => {
   );
 };
 
-export default CustomButton; */
-import React, { MouseEventHandler } from 'react';
+export default CustomButton;
+/* import React, { MouseEventHandler } from 'react';
 
 interface PropTypes {
   className?: string;
@@ -57,4 +57,4 @@ const Button = ({
   </button>
 );
 
-export default Button
+export default Button */

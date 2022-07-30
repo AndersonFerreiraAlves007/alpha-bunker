@@ -26,12 +26,7 @@ interface UserProviderTypes {
 }
 
 export const UserProvider = ({ children }: UserProviderTypes) => {
-  const [user, setUser] = useState<UserTypes|null>({
-    birthDate: '1999-22-2',
-    cpf: '',
-    email: '',
-    name: ''
-  });
+  const [user, setUser] = useState<UserTypes|null>(null);
   const [loading, setLoading] = useState(true);
 
   return (
