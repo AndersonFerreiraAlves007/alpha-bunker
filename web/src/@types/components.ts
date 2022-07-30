@@ -6,6 +6,7 @@ export interface InputProps {
   value: string;
   errorMessage: string;
   inputClassName: string;
+  placeholder?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
