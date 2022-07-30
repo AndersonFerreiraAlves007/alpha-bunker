@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Button } from '../../components/Button';
+import Button from '../../components/Button';
 import { Modal } from '../../components/ModalConfirmTransaction';
 import { api } from '../../libs/api';
-import BalanceLabel from '@/components/BalanceLabel'
-import Navbar from '@/components/Navbar'
-import ListTransactionsExtract from '@/components/ListTransactionsExtract'
+import BalanceLabel from '../../components/BalanceLabel'
+import Navbar from '../../components/Navbar'
+import ListTransactionsExtract from '../../components/ListTransactionsExtract'
 
-export const MakeDeposit = () => {
+export const Extract = () => {
   async function handleDeposit() {
     try {
       // fazer request

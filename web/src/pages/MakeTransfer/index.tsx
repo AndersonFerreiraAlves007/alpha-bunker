@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Button } from '../../components/Button';
+import Button from '../../components/Button';
 import { Modal } from '../../components/ModalConfirmTransaction';
 import { api } from '../../libs/api';
-import BalanceLabel from '@/components/BalanceLabel'
-import Navbar from '@/components/Navbar'
-import FormTransfer from '@/components/FormTransfer'
+import BalanceLabel from '../../components/BalanceLabel'
+import Navbar from '../../components/Navbar'
+import FormTransfer from '../../components/FormTransfer'
 
 export const MakeTransfer = () => {
   const [modal, setModal] = useState(false);

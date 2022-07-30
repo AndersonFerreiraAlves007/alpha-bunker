@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Button } from '../../components/Button';
+import Button from '../../components/Button';
 import { Modal } from '../../components/ModalConfirmTransaction';
 import { api } from '../../libs/api';
-import BalanceLabel from '@/components/BalanceLabel'
-import Navbar from '@/components/Navbar'
+import BalanceLabel from '../../components/BalanceLabel'
+import Navbar from '../../components/Navbar'
 
 export const MakeDeposit = () => {
   const [modal, setModal] = useState(false);

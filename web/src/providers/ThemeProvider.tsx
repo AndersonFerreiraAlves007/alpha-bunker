@@ -2,7 +2,7 @@ import React, { ReactNode, createContext, useState, useContext } from 'react';
 
 interface ContextTypes {
   isDarkMode: boolean;
-  setIsDarkMode: any
+  toggleIsDarkMode: any
 }
 
 export const ThemeContext = createContext<Partial<ContextTypes>>({});
@@ -12,18 +12,22 @@ interface ThemeProviderTypes {
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderTypes) => {
-  const [isDarkMode, setIsDarkMode] = useState();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  function toggleIsDarkMode() {
+    setIsDarkMode(!isDarkMode)
+  }
 
   return (
-    <UserContext.Provider
+    <ThemeContext.Provider
       value={{
         isDarkMode,
-        setIsDarkMode
+        toggleIsDarkMode
       }}
     >
       {children}
-    </UserContext.Provider>
+    </ThemeContext.Provider>
   );
 };
 
-export const useUser = () => useContext(UserContext);
+export const useTheme = () => useContext(ThemeContext);
