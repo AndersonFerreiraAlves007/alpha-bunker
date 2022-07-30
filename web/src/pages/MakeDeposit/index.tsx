@@ -1,10 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '../../components/Button';
+import { INPUT_TYPE_CLASSES } from '../../components/Input';
+import Input from '../../components/Input';
 import { Modal } from '../../components/ModalConfirmTransaction';
 import { api } from '../../libs/api';
+import { UploadSimple } from "phosphor-react"
 
 export const MakeDeposit = () => {
   const [modal, setModal] = useState(false);
+  const [formData, setFormData] = useState({
+    agencia: "",
+    conta: "",
+    valor: "",
+    senha: ""
+  })
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  }
+
+  useEffect(() => {
+    console.log(formData)
+  }, [formData])
 
   async function handleDeposit() {
     try {
@@ -27,22 +45,47 @@ export const MakeDeposit = () => {
           handleConfirmModal={handleDeposit}
         />
       )}
-      <div className="flex flex-col gap-5">
-        <Button
-          category="primary"
-          label="Abrir modal"
-          onClick={() => setModal(true)}
-        />
-        <Button
-          category="secondary"
-          label="Abrir modal"
-          onClick={() => setModal(true)}
-        />
-        <Button
-          category="cancel"
-          label="Abrir modal"
-          onClick={() => setModal(true)}
-        />
+      <div className="flex flex-col gap-5 border-solid border-[1px] rounded-xl !border-input-border w-[330px] h-[370px] p-4">
+        <div className='flex'>
+          <UploadSimple size={24} color="#c98e36" />
+          <h3 className='text-header-gold ml-1'>Depósito</h3>
+        </div>
+        <p className='text-input-base'>Dados para o depósito</p>
+        <div className='flex justify-between'>
+          <Input
+            name='agencia'
+            type='text'
+            value={formData.agencia}
+            inputClassName={INPUT_TYPE_CLASSES.base}
+            onChange={handleChange}
+          />
+          <Input
+            name='conta'
+            type='text'
+            value={formData.conta}
+            inputClassName={INPUT_TYPE_CLASSES.base}
+            onChange={handleChange}
+          />
+        </div>
+        <div className='w-full flex justify-between flex-col h-[110px]'>
+          <Input
+            name='valor'
+            type='text'
+            value={formData.valor}
+            inputClassName={INPUT_TYPE_CLASSES.base}
+            onChange={handleChange}
+          />
+          <Input
+            name='senha'
+            type='text'
+            value={formData.senha}
+            inputClassName={INPUT_TYPE_CLASSES.base}
+            onChange={handleChange}
+          />
+        </div>
+        <button className='bg-btn-primary-base rounded-md h-[50px]'>
+          Sacar
+        </button>
       </div>
     </>
   );

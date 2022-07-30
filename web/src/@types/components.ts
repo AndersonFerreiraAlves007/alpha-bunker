@@ -1,12 +1,13 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps, MouseEventHandler } from 'react';
 
 export interface InputProps {
-  name: string;
-  type: string;
-  value: string;
-  errorMessage: string;
-  inputClassName: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  name?: string;
+  type?: string;
+  value?: string;
+  errorMessage?: string;
+  placeholder?: string;
+  inputClassName?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface FormProps {
