@@ -16,8 +16,9 @@ interface IGetExtractResponse {
     id: number,
     description: string,
     value: number,
+    date: string,
     origin_account_id: number,
-    dest_account_id: number
+    dest_account_id: number,
   })[]
 }
 
@@ -29,7 +30,8 @@ async function getExtract(data: IGetExtractRequest): Promise<IGetExtractResponse
         dest_account_id: 1,
         id: 1,
         origin_account_id: 2,
-        value: 23
+        value: 23,
+        date: '12/02/2022'
       }
     ]
   }
@@ -73,8 +75,8 @@ async function createTransfer(data: ICreateTransferRequest): Promise<ICreateTran
 export interface ICreateDepositRequest {
   value: number;
   type: string;
-  origin_account_id: 1;
-  dest_account_id: 2;
+  origin_account_id: number;
+  dest_account_id: number;
 }
 
 export interface ICreateDepositResponse {
@@ -102,8 +104,8 @@ async function createDeposit(data: ICreateDepositRequest): Promise<ICreateDeposi
 export interface ICreateWithdrawRequest {
   value: number;
   type: string;
-  origin_account_id: 1;
-  dest_account_id: 2;
+  origin_account_id: number;
+  dest_account_id: number;
 }
 
 export interface ICreateWithdrawResponse {
