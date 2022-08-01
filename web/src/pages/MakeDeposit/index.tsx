@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { INPUT_TYPE_CLASSES } from '../../components/Input';
 import Input from '../../components/Input';
 import { Modal } from '../../components/ModalConfirmTransaction';
-import { api } from '../../libs/api';
 import BalanceLabel from '../../components/BalanceLabel'
 import Navbar from '../../components/Navbar'
 import AppHeader from '../../components/AppHeader'
@@ -13,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 export const MakeDeposit = () => {
   const navigate = useNavigate()
-  const { user } = useUser()
+  const { user, updateBalance } = useUser()
   const [modal, setModal] = useState(false);
   const [formData, setFormData] = useState({
     valor: "",
@@ -39,7 +38,7 @@ export const MakeDeposit = () => {
           type: 'deposit',
           value: Number(formData.valor)
        })
-
+       await updateBalance()
        navigate(`/transaction/${id}`)
     } catch (error) {
       console.log(error);

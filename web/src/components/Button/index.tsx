@@ -14,8 +14,6 @@ const getButtonClass = (btnclass = BUTTON_TYPES.base) => ({
   [BUTTON_TYPES.error]: errorButton,
 }[btnclass]);
 
-
-
 const CustomButton: React.FC<ButtonTypes> = (props) => {
   const { children, btnclass, handleClick, type } = props;
   const buttonClass = getButtonClass(btnclass);

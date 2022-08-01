@@ -1,25 +1,37 @@
-import React, { useState } from 'react';
-import Button from '../../components/Button';
-import { Modal } from '../../components/ModalConfirmTransaction';
-import { api } from '../../libs/api';
+import React, { useEffect, useState } from 'react';
 import BalanceLabel from '../../components/BalanceLabel'
 import Navbar from '../../components/Navbar'
 import AppHeader from '../../components/AppHeader'
+import { useUser } from '../../providers/UserProvider'
+import { getTransaction, IGetTransactionResponse } from '../../libs/api'
+import TransactionVoucher from '../../components/TransactionVoucher'
+import { useParams } from 'react-router-dom';
 
 export const Transaction = () => {
-  async function handleDeposit() {
+  const { transactionId } = useParams();
+  const { updateBalance } = useUser()
+  const [data, setData] = useState<IGetTransactionResponse|null>(null)
+
+  async function handleTransaction() {
     try {
-      // fazer request
+      await updateBalance()
+      const data = await getTransaction(Number(transactionId))
+      setData(data)
     } catch (error) {
       console.log(error);
     }
   }
 
+  useEffect(() => {
+    handleTransaction()
+  }, [transactionId])
+
   return (
     <>
       <AppHeader/>
       <Navbar/>
-      <BalanceLabel accountNumber='' agency='' balance={0} digitAccountV="" digitAgencyV=''/>
+      <BalanceLabel />
+      <TransactionVoucher transaction={data}/>
     </>
   );
 };

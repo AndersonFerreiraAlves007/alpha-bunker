@@ -43,11 +43,10 @@ interface ICreateTransferRequest {
   value: number;
   type: string;
   origin_account_id: number;
-  dest_account_id: number;
+  dest_account_number: string;
   dest_agency: string;
   dest_account_ver_code: string;
   dest_agency_ver_code: string;
-  dest_cpf: string;
 }
 
 interface ICreateTransferResponse {
@@ -134,7 +133,7 @@ interface IGetTransactionRequest {
 
 }
 
-interface IGetTransactionResponse {
+export interface IGetTransactionResponse {
   id: number;
   description: string;
   value: number;

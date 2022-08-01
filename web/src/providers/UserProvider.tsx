@@ -6,11 +6,14 @@ import React, {
   useEffect
 } from 'react';
 
+import { getAccount } from '../libs/api'
+
 interface ContextTypes {
   user: UserTypes|null;
   loading: boolean;
   setLoading: any;
   setUser: any;
+  updateBalance: any;
 }
 
 interface UserTypes {
@@ -44,13 +47,35 @@ export const UserProvider = ({ children }: UserProviderTypes) => {
     setUser(text ? JSON.parse(text) : null)
   }, [])
 
+  async function updateBalance() {
+    const data = await getAccount(Number(localStorage.getItem('account_id')))
+    const obj = {
+      name: user?.name || '',
+      email: user?.name || '',
+      cpf: user?.cpf  || '',
+      birthDate: user?.birthDate  || '',
+      id: user?.id  || 0,
+      account: {
+        id: data.id,
+        account_number: data.account_number,
+        agency: data.agency,
+        digit_agency_v: data.digit_agency_v,
+        digit_account_v: data.digit_account_v,
+        balance: data.balance,
+      }
+    }
+    localStorage.setItem('user', JSON.stringify(obj))
+    setUser(obj)
+  }
+
   return (
     <UserContext.Provider
       value={{
         user,
         loading,
         setLoading,
-        setUser
+        setUser,
+        updateBalance
       }}
     >
       {children}

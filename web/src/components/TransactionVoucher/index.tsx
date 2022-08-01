@@ -1,4 +1,5 @@
 import { Receipt } from 'phosphor-react';
+
 const TransactionVoucher = () => {
   return (
     <div>
