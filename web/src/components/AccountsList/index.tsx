@@ -1,30 +1,32 @@
 import { Vault } from 'phosphor-react';
+import { useEffect, useState } from 'react';
 import AccountData from '../AccountData';
-
+import { getAccounts, IGetAccountsResponse } from '../../libs/api';
 const AccountsList: React.FC = () => {
-  const accounts = [
-    {
-      agencia: '12569',
-      conta: '741852',
-    },
-    {
-      agencia: '78956',
-      conta: '412369',
-    },
-  ];
+  const [accounts, setAccounts] = useState<IGetAccountsResponse>([]);
+  const getData = async () => {
+    const data = await getAccounts({});
+    setAccounts(data);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+ //const conta = accounts.map((account) => {
 
   return (
-    <div className='flex flex-col gap-y-[12px] '>
-      <div className='flex gap-x-[10px] text-[#C98E26] text-[16px]'>
+    <div className="flex flex-col gap-y-[12px] ">
+      <div className="flex gap-x-[10px] text-[#C98E26] text-[16px]">
         <Vault size={32} color="#C98E26" />
         <h2>Minhas contas correntes</h2>
       </div>
-      <div className='flex flex-col gap-y-[25px] text-[#727272]'>
+      <div className="flex flex-col gap-y-[25px] text-[#727272]">
         {accounts.map((account) => (
           <AccountData
-            key={account.conta}
-            agencia={account.agencia}
-            conta={account.conta}
+            key={`${account.account_number}-${account.digit_account_v}`}
+            agencia={`${account.agency}${account.digit_agency_v}`}
+            conta={`${account.account_number}${account.digit_account_v}`}
           />
         ))}
       </div>

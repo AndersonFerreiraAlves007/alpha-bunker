@@ -1,12 +1,13 @@
-import React from 'react'
+import React from 'react';
 import { Receipt } from 'phosphor-react';
+import { formateDate } from '../../libs/api';
 
 interface TransactionVoucherProps {
-  transaction: any
+  transaction: any;
 }
 
 function formatMoeda(value: number) {
-  return `$${value.toFixed(2)}`
+  return `$${value.toFixed(2)}`;
 }
 
 function getDados(type: any, transaction: any) {
@@ -23,7 +24,7 @@ function getDados(type: any, transaction: any) {
         is_origin: false,
         is_transfer: false,
         nome: '',
-      }
+      };
     case 'deposit fee sent':
       return {
         label: 'Taxa de depósito',
@@ -36,7 +37,7 @@ function getDados(type: any, transaction: any) {
         is_origin: false,
         is_transfer: false,
         nome: '',
-      }
+      };
     case 'transfer sent':
       return {
         label: 'Transferência enviada',
@@ -49,7 +50,7 @@ function getDados(type: any, transaction: any) {
         is_origin: false,
         is_transfer: true,
         nome: transaction.user_dest,
-      }
+      };
     case 'withdraw sent':
       return {
         label: 'Saque',
@@ -62,7 +63,7 @@ function getDados(type: any, transaction: any) {
         is_origin: false,
         is_transfer: false,
         nome: '',
-      }
+      };
     case 'withdraw fee sent':
       return {
         label: 'Taxa de saque',
@@ -75,7 +76,7 @@ function getDados(type: any, transaction: any) {
         is_origin: false,
         is_transfer: false,
         nome: '',
-      }
+      };
     case 'transfer received':
       return {
         label: 'Transferência recebida',
@@ -88,7 +89,7 @@ function getDados(type: any, transaction: any) {
         is_origin: true,
         is_transfer: true,
         nome: transaction.user_origin,
-      }
+      };
     case 'transfer fee sent':
       return {
         label: 'Taxa de transferência',
@@ -101,7 +102,7 @@ function getDados(type: any, transaction: any) {
         is_origin: false,
         is_transfer: false,
         nome: '',
-      }
+      };
     default:
       return {
         label: '',
@@ -114,13 +115,14 @@ function getDados(type: any, transaction: any) {
         is_origin: true,
         is_transfer: false,
         nome: '',
-      }
+      };
   }
 }
 
-const TransactionVoucher : React.FC<TransactionVoucherProps> = ({ transaction }) => {
-
-  console.log('lalalala', transaction)
+const TransactionVoucher: React.FC<TransactionVoucherProps> = ({
+  transaction,
+}) => {
+  console.log('lalalala', transaction);
 
   const {
     account_number,
@@ -132,10 +134,10 @@ const TransactionVoucher : React.FC<TransactionVoucherProps> = ({ transaction })
     is_transfer,
     label,
     nome,
-    prefix
-  } = getDados(transaction.description, transaction)
-  const data = transaction.date
-  const valor = transaction.value
+    prefix,
+  } = getDados(transaction.description, transaction);
+  const data = formateDate(transaction.date);
+  const valor = Number(transaction.value);
   return (
     <div>
       <div>
@@ -145,17 +147,18 @@ const TransactionVoucher : React.FC<TransactionVoucherProps> = ({ transaction })
       <div>
         <h2>Tipo: {label}</h2>
         <p>Data: {data}</p>
-        {
-          is_transfer && <>
-            <h2>{ !is_origin ?  'Dados de destino:' : 'Dados de origin:'}</h2>
+        {is_transfer && (
+          <>
+            <h2>{!is_origin ? 'Dados de destino:' : 'Dados de origin:'}</h2>
             <p>Nome: {nome}</p>
             <p>Agência: {`${agency}-${digit_agency_v}`}</p>
             <p>Conta: {`${account_number}-${digit_account_v}`}</p>
           </>
-        }
-        <p className={prefix === '-' ? 'text-[#FF5959]' : 'text-[#53D496]'}>{`${prefix === '-' ? '- ' : '+ '}${formatMoeda(valor)}`}</p>
+        )}
+        <p className={prefix === '-' ? 'text-[#FF5959]' : 'text-[#53D496]'}>{`${
+          prefix === '-' ? '- ' : '+ '
+        }${formatMoeda(valor)}`}</p>
       </div>
-
     </div>
   );
 };

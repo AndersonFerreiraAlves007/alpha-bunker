@@ -32,6 +32,7 @@ const ControlledLoginForm = () => {
       cpf: formValues.cpf,
       password: formValues.password
     })
+    localStorage.setItem('token', token)
 
     const { birthdate, cpf, email, id, name } = await getUser({})
 
@@ -51,7 +52,7 @@ const ControlledLoginForm = () => {
       }
     })
 
-    localStorage.setItem('token', token)
+
     localStorage.setItem('account_id', String(account.id))
     localStorage.setItem('user_id', String(account.user_id))
     localStorage.setItem('user', JSON.stringify({

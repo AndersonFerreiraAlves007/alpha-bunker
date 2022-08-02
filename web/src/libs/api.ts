@@ -36,7 +36,7 @@ interface IGetExtractResponse {
   })[]
 }
 
-function formateDate(date: any) {
+export function formateDate(date: any) {
   const obj = new Date(date)
   return obj.toLocaleDateString()
 }
@@ -89,7 +89,7 @@ async function getExtract(data: IGetExtractRequest): Promise<IGetExtractResponse
 
   for(let i = 0; i < dados.data.length; i++) {
     retorno.push({
-      date: formateDate(dados.data[i].value),
+      date: formateDate(dados.data[i].date),
       description: dados.data[i].description,
       dest_account_id: Number(dados.data[i].dest_account_id),
       id: Number(dados.data[i].id),
@@ -342,7 +342,7 @@ interface IGetAccountsRequest {
 
 }
 
-type IGetAccountsResponse = ({
+export type IGetAccountsResponse = ({
   id: number;
   account_number: string;
   agency: string;
