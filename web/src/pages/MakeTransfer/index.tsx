@@ -134,7 +134,7 @@ export const MakeTransfer = () => {
   return (
     <>
       <AppHeader/>
-      <Navbar/>
+      {/* <Navbar/> */}
       <BalanceLabel />
       {modal && (
         <Modal

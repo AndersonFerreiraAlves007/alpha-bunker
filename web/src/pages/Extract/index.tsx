@@ -51,7 +51,7 @@ export const Extract = () => {
   return (
     <>
       <AppHeader/>
-      <Navbar/>
+     {/*  <Navbar/> */}
       <BalanceLabel />
       <ListTransactionsExtract daysTransactions={daysTransactions}/>
     </>

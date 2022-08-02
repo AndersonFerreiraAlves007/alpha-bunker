@@ -14,9 +14,9 @@ export const Transaction = () => {
 
   async function handleTransaction() {
     try {
-      await updateBalance()
       const data = await getTransaction(Number(transactionId))
       setData(data)
+      await updateBalance()
     } catch (error) {
       console.log(error);
     }
@@ -26,12 +26,14 @@ export const Transaction = () => {
     handleTransaction()
   }, [transactionId])
 
+  console.log('data', data)
+
   return (
     <>
       <AppHeader/>
-      <Navbar/>
+     {/*  <Navbar/> */}
       <BalanceLabel />
-      <TransactionVoucher transaction={data}/>
+      {data && <TransactionVoucher transaction={data}/>}
     </>
   );
 };

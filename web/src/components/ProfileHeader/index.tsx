@@ -1,12 +1,14 @@
 import React from 'react'
-import { ArrowLeft } from 'phosphor-react';
+import { ArrowLeft, Moon, Sun } from 'phosphor-react';
 import { useUser } from '../../providers/UserProvider'
 import { Link } from "react-router-dom";
+import { useTheme } from '../../providers/ThemeProvider'
 
 const ProfileHeader = () => {
   const {
     user
   } = useUser()
+  const { isDarkMode, toggleIsDarkMode } = useTheme()
 
   const name = user ? user.name : ''
 
@@ -28,6 +30,9 @@ const ProfileHeader = () => {
       <div className="flex w-full justify-center items">
         <h1 className='' >{name}</h1>
       </div>
+      <span>
+        { isDarkMode ? <Moon onClick={toggleIsDarkMode}/> : <Sun onClick={toggleIsDarkMode}/> }
+      </span>
     </div>
   );
 };

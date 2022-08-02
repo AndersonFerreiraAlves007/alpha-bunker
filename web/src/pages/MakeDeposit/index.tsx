@@ -95,7 +95,7 @@ export const MakeDeposit = () => {
   return (
     <>
       <AppHeader/>
-      <Navbar/>
+      {/* <Navbar/> */}
       <BalanceLabel />
       {modal && (
         <Modal

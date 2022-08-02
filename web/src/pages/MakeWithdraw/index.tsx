@@ -96,7 +96,7 @@ export const MakeWithdraw = () => {
   return (
     <>
       <AppHeader/>
-      <Navbar/>
+      {/* <Navbar/> */}
       <BalanceLabel />
       {modal && (
         <Modal

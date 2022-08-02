@@ -26,13 +26,29 @@ async function getExtract(data: IGetExtractRequest): Promise<IGetExtractResponse
   return {
     transactions: [
       {
-        description: 'transfer',
+        description: 'transfer received',
         dest_account_id: 1,
         id: 1,
         origin_account_id: 2,
         value: 23,
         date: '12/02/2022'
-      }
+      },
+      {
+        description: 'transfer fee',
+        dest_account_id: 1,
+        id: 1,
+        origin_account_id: 2,
+        value: 5,
+        date: '12/02/2022'
+      },
+      {
+        description: 'transfer received',
+        dest_account_id: 1,
+        id: 1,
+        origin_account_id: 2,
+        value: 23,
+        date: '12/02/2022'
+      },
     ]
   }
 }
@@ -133,6 +149,15 @@ interface IGetTransactionRequest {
 
 }
 
+/* export interface IGetTransactionResponse {
+  id: number;
+  description: string;
+  value: number;
+  date: string;
+  origin_account_id: number;
+  dest_account_id: number;
+} */
+
 export interface IGetTransactionResponse {
   id: number;
   description: string;
@@ -140,16 +165,36 @@ export interface IGetTransactionResponse {
   date: string;
   origin_account_id: number;
   dest_account_id: number;
+  dest_account: {
+    id: number;
+    account_number: string;
+    agency: string;
+    digit_agency_v: string;
+    digit_account_v: string;
+    balance: number;
+    user_id: number;
+  }
 }
 
-async function getTransaction(id: number): Promise<IGetTransactionResponse> {
+async function getTransaction(id: number): Promise<any> {
   return {
     id: 2,
-    description: 'withdraw',
+    description: 'withdraw sent',
     value: 12,
     date: '22/02/2022',
     origin_account_id: 1,
+    user_origin: "Anderson Oliveira",
     dest_account_id: 1,
+    user_dest: "André Oliveira",
+    dest_account: {
+      account_number: '12123',
+      agency: '12121',
+      balance: 0,
+      digit_account_v: '1212',
+      digit_agency_v: '1212',
+      id: 1,
+      user_id: 1
+    }
   }
 }
 

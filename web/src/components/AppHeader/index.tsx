@@ -3,6 +3,7 @@ import React from 'react'
 import { ArrowLeft, UserCircle } from 'phosphor-react';
 import { useUser } from '../../providers/UserProvider'
 import { Link } from "react-router-dom";
+import Navbar from '../../components/Navbar'
 
 const ProfileHeader = () => {
   const {
@@ -19,6 +20,7 @@ const ProfileHeader = () => {
           <UserCircle size={32} />
         </Link>
       </div>
+      <Navbar/>
     </div>
   );
 };

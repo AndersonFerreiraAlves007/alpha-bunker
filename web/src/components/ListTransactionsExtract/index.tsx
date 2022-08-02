@@ -19,7 +19,13 @@ const DayTransactions: FC<DayTransactionsProps> = ({
           prefix: '+',
           color: '#53D496'
         }
-      case 'transfer':
+      case 'deposit fee':
+        return {
+          label: 'Taxa de depósito',
+          prefix: '-',
+          color: '#FF5959'
+        }
+      case 'transfer sent':
         return {
           label: 'Transferência enviada',
           prefix: '-',
@@ -31,11 +37,23 @@ const DayTransactions: FC<DayTransactionsProps> = ({
           prefix: '-',
           color: '#FF5959'
         }
-      case 'transfer':
+      case 'withdraw fee':
+        return {
+          label: 'Taxa de saque',
+          prefix: '-',
+          color: '#FF5959'
+        }
+      case 'transfer received':
         return {
           label: 'Transferência recebida',
           prefix: '+',
           color: '#53D496'
+        }
+      case 'transfer fee':
+        return {
+          label: 'Taxa de transferência',
+          prefix: '-',
+          color: '#FF5959'
         }
       default:
         return {
@@ -57,7 +75,7 @@ const DayTransactions: FC<DayTransactionsProps> = ({
         {transactions.map((item: any) => {
           const { color, label, prefix } = getLabelTransaction(item.type)
           return <div className='flex justify-between'>
-            <span>{label}</span>
+            <span style={{ color: 'black' }}>{label}</span>
             <span className={prefix === '-' ? 'text-[#FF5959]' : 'text-[#53D496]'}>{`${prefix === '-' ? '- ' : '+ '}${formatMoeda(item.value)}`}</span>
           </div>
       })}
