@@ -1,5 +1,5 @@
 # BackEnd do AlphaBunker
-![Logo-AlphaBunker](readme-files/logo.jpg)
+![Logo-AlphaBunker](readme-files/logo.jpg?style=centerme)
 
 <div style="display: inline_block;" align="center" >
     <img align="center" height="100" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-plain.svg" />
