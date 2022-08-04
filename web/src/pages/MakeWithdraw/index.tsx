@@ -110,7 +110,7 @@ export const MakeWithdraw = () => {
           <UploadSimple size={24} color="#c98e36" />
           <h3 className='text-header-gold ml-1 font-medium'>Saque</h3>
         </div>
-        <p className='text-input-base mt-[-12px] mb-[-10px] text-black dark:text-[#F7F7F7]'>Dados para o saque</p>
+        <p className=' mt-[-12px] mb-[-10px] text-paragraph-dark dark:text-[#F7F7F7]'>Dados para o saque</p>
         <div className='flex justify-between'>
           <div className='w-[110px]'>
             <Input
@@ -149,7 +149,7 @@ export const MakeWithdraw = () => {
           />
           <Input
             name='senha'
-            type='text'
+            type='password'
             label='Senha'
             value={formData.senha}
             inputClassName={INPUT_TYPE_CLASSES.base}

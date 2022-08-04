@@ -46,7 +46,7 @@ export const Modal = ({ title, handleConfirmModal, setModal }: PropTypes) => {
           />
         </div>
         <p className="my-5 px-5 text-sm text-center text-paragraph-dark font-medium">
-          Esta ação efetuará a transação. deseja continuar?
+          Esta ação efetuará a transação. Deseja continuar?
         </p>
         <div className="mb-5 flex justify-center gap-5">
           <Button

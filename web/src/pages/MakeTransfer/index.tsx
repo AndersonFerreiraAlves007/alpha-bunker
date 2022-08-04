@@ -176,7 +176,7 @@ export const MakeTransfer = () => {
             />
           </div>
         </div>
-        <div>
+        <div className='mt-1'>
           <h2 className="mb-[6px] mt-[7px] text-[#353535] dark:text-[#F7F7F7]">
             Destino
           </h2>
@@ -205,7 +205,7 @@ export const MakeTransfer = () => {
             </div>
           </div>
         </div>
-        <div className="w-full flex justify-between flex-col h-[110px] mt-[15px] mb-[15px] h-[79px]">
+        <div className="w-full flex justify-between flex-col mt-[15px] mb-[15px] h-[86px]">
           <Input
             name="valor"
             type="text"
@@ -217,7 +217,7 @@ export const MakeTransfer = () => {
           />
           <Input
             name="senha"
-            type="text"
+            type="password"
             label="Senha"
             value={password.toString()}
             inputClassName={INPUT_TYPE_CLASSES.base}

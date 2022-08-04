@@ -28,12 +28,12 @@ select {
 }
 
 input:focus-within ~ label {
- @apply transform scale-75 -translate-y-6 text-[#338896];
+ @apply transform scale-75 -translate-y-6 text-[#338896] bg-transparent;
 }
 
 .outline input:focus-within ~ label,
 .outline input:not(:placeholder-shown) ~ label {
-  @apply transform scale-75 translate-y-7  -translate-x-6 z-0 ml-3 px-1 py-0;
+  @apply transform scale-75 translate-y-7  -translate-x-6 z-0 ml-3 px-1 py-0 bg-transparent;
 }
 
 input:focus-within ~ label {

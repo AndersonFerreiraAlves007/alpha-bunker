@@ -7,8 +7,8 @@ export const INPUT_TYPE_CLASSES = {
 }
 
 const base = {
-  input: "block p-4 w-full text-sm appearance-none focus:outline-none bg-transparent dark:bg-transparent text-input-text !h-[33px]",
-  label: "absolute top-0 text-sm text-brand bg-transparent p-1 -z-1 duration-300 origin-0 text-sm",
+  input: "block p-2 w-full text-sm text-fontFamily-brand bg-transparent appearance-none focus:outline-none dark:bg-transparent text-input-placeholder !h-[29px]",
+  label: "absolute top-0 text-sm w-auto text-fontFamily-brand !h-[29px] bg-input-base text-input-placeholder p-1 z-20 duration-300 origin-0",
   span: "block w-full invisible"
 }
 
@@ -29,7 +29,7 @@ const Input: React.FC<InputProps> = (props) => {
   const { name, type, value, onChange, inputClassName, errorMessage, label, disabled } = props;
   const inputClasses = getInputClasses(inputClassName);
   return (
-    <div className="outline relative border-2 focus-within:border-[#338896] rounded-lg px-2.5 pb-2.5 !h-[33px]">
+    <div className="outline relative border-2 bg-input-base focus-within:border-[#338896] rounded-lg px-2.5 pb-2.5 !h-[33px]">
       <input
         className={inputClasses.input}
         id={name}

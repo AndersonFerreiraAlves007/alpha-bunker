@@ -148,7 +148,7 @@ export const MakeDeposit = () => {
           />
           <Input
             name='senha'
-            type='text'
+            type='password'
             label='Senha'
             value={formData.senha}
             inputClassName={INPUT_TYPE_CLASSES.base}
