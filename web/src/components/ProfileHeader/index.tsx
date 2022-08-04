@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArrowLeft, Moon, Sun } from 'phosphor-react';
+import { ArrowLeft, Moon, Sun, SignOut } from 'phosphor-react';
 import { useUser } from '../../providers/UserProvider'
 import { Link } from "react-router-dom";
 import { useTheme } from '../../providers/ThemeProvider'
