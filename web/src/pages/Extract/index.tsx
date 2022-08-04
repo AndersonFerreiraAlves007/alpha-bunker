@@ -27,13 +27,15 @@ export const Extract = () => {
             date: transactions.transactions[i].date,
             transactions: [{
               type: transactions.transactions[i].description,
-              value: transactions.transactions[i].value
+              value: transactions.transactions[i].value,
+              id: transactions.transactions[i].id
             }]
           })
         } else {
           days[days.length - 1].transactions.push({
             type: transactions.transactions[i].description,
-            value: transactions.transactions[i].value
+            value: transactions.transactions[i].value,
+            id: transactions.transactions[i].id
           })
         }
         currentDate = transactions.transactions[i].date

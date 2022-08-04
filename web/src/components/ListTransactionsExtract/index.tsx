@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Bank, Bell } from "phosphor-react";
+import { useNavigate } from 'react-router-dom';
 
 type DayTransactionsProps = {
   day: any;
@@ -10,7 +11,7 @@ const DayTransactions: FC<DayTransactionsProps> = ({
   day,
   transactions
 }) => {
-
+  const navigate = useNavigate();
   function getLabelTransaction(type: string) {
     switch (type) {
       case 'deposit':
@@ -68,13 +69,17 @@ const DayTransactions: FC<DayTransactionsProps> = ({
     return `$${value.toFixed(2)}`
   }
 
+  function viewComprovante(id: any) {
+    navigate(`/transaction/${id}`);
+  }
+
   return (
     <div className='bg-[#F3F9F9] dark:bg-transparent p-2 dark:p-0 mt-[20px] rounded-sm' >
       <h2 className='text-[#727272] font-medium'>{day}</h2>
       <div className='ml-[8px]'>
         {transactions.map((item: any) => {
           const { color, label, prefix } = getLabelTransaction(item.type)
-          return <div className='flex justify-between'>
+          return <div className='flex justify-between' onClick={() => viewComprovante(item.id)}>
             <span className='text-[#A1A1A1] text-[15px]'>{label}</span>
             <span className={prefix === '-' ? 'text-[#FF5959] font-medium' : 'text-[#53D496] font-medium'}>{`${prefix === '-' ? '- ' : '+ '}${formatMoeda(item.value)}`}</span>
           </div>
@@ -92,7 +97,7 @@ const ListTransactionsExtract: FC<ListTransactionsExtractProps> = ({
   daysTransactions
 }) => {
   return (
-    <div className='border-[1px] w-[320px] bg-white dark:bg-transparent dark:border-[#424245] rounded-xl p-3.5 mt-[80px]'>
+    <div className='border-[1px] w-[320px] bg-white dark:bg-transparent dark:border-[#424245] absolute top-[270px] rounded-xl p-3.5 '>
       <div className='flex items-center justify-between'>
         <div className='flex items-center'>
           <span><Bank size={24} color="#c98e36" /></span>

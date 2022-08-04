@@ -10,6 +10,11 @@ const ProfileHeader = () => {
   } = useUser()
   const { isDarkMode, toggleIsDarkMode } = useTheme()
 
+  const handleLogout = () => {
+    localStorage.clear()
+    window.location.reload()
+  }
+
   const name = user ? user.name : ''
 
   const src = 'https://avatars3.githubusercontent.com/u/527058?s=460&v=4'
@@ -30,8 +35,9 @@ const ProfileHeader = () => {
       <div className="profile-header__avatar">
         <img src={src} className="w-[80px] h-[80px] rounded-full my-2.5" />
       </div>
-      <div className="flex w-full justify-center items text-[#F7F7F7] text-[20px]">
+      <div className="flex  flex-col w-full justify-center items-center text-[#F7F7F7] text-[20px] gap-2">
         <h1 className='' >{name}</h1>
+        <SignOut color='white' size={20} onClick={handleLogout}/>
       </div>
     </div>
   );

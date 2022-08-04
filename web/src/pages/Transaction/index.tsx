@@ -16,7 +16,7 @@ export const Transaction = () => {
     try {
       console.log('aleatório ',transactionId)
       const data = await getTransaction(Number(transactionId))
-      console.log('prostituto ',data)
+
       setData(data)
       await updateBalance()
     } catch (error) {
