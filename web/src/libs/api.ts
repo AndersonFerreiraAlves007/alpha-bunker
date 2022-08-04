@@ -4,6 +4,20 @@ export const api = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_URL_API,
 });
 
+api.interceptors.request.use(
+  async (config) => {
+    const token = localStorage.getItem("token");
+
+    config.headers = {
+      ...config.headers,
+      authorization: `Bearer ${token}`,
+    };
+
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 interface IGetExtractRequest {
   account_number: string;
   agency: string;
@@ -22,8 +36,13 @@ interface IGetExtractResponse {
   })[]
 }
 
+export function formateDate(date: any) {
+  const obj = new Date(date)
+  return obj.toLocaleDateString()
+}
+
 async function getExtract(data: IGetExtractRequest): Promise<IGetExtractResponse> {
-  return {
+  /* return {
     transactions: [
       {
         description: 'transfer received',
@@ -50,6 +69,37 @@ async function getExtract(data: IGetExtractRequest): Promise<IGetExtractResponse
         date: '12/02/2022'
       },
     ]
+  } */
+
+  const dados = await api.post('/transactions/history', {
+    account_number: data.account_number,
+    agency: data.agency,
+    digit_agency_v: data.digit_agency_v,
+    digit_account_v: data.digit_account_v
+  })
+
+  const retorno: ({
+    id: number,
+    description: string,
+    value: number,
+    date: string,
+    origin_account_id: number,
+    dest_account_id: number,
+  })[] = []
+
+  for(let i = 0; i < dados.data.length; i++) {
+    retorno.push({
+      date: formateDate(dados.data[i].date),
+      description: dados.data[i].description,
+      dest_account_id: Number(dados.data[i].dest_account_id),
+      id: Number(dados.data[i].id),
+      origin_account_id: Number(dados.data[i].origin_account_id),
+      value: Number(dados.data[i].value)
+    })
+  }
+
+  return {
+    transactions: retorno
   }
 }
 
@@ -75,14 +125,36 @@ interface ICreateTransferResponse {
 }
 
 async function createTransfer(data: ICreateTransferRequest): Promise<ICreateTransferResponse> {
-  return {
+
+  /* return {
     description: 'transfer',
     value: 12,
     date: '22/02/2022',
     origin_account_id: 1,
     dest_account_id: 1,
     id: 1
+  } */
+
+  const dados = await api.post('/transactions/transfer', {
+    value: data.value,
+    type: 'transferência',
+    origin_account_id: data.origin_account_id,
+    dest_account_number: data.dest_account_number,
+    dest_agency: data.dest_agency,
+    dest_account_ver_code: data.dest_account_ver_code,
+    dest_agency_ver_code: data.dest_agency_ver_code
+  })
+
+
+  return {
+    date: formateDate(dados.data.date),
+    description: dados.data.description,
+    dest_account_id: Number(dados.data.dest_account_id),
+    id: Number(dados.data.id),
+    origin_account_id: Number(dados.data.origin_account_id),
+    value: Number(dados.data.value)
   }
+
 }
 
 ////////////////
@@ -104,13 +176,29 @@ export interface ICreateDepositResponse {
 }
 
 async function createDeposit(data: ICreateDepositRequest): Promise<ICreateDepositResponse> {
-  return {
+  /* return {
     description: 'deposit',
     value: 12,
     date: '22/02/2022',
     origin_account_id: 1,
     dest_account_id: 1,
     id: 1
+  } */
+
+  const dados = await api.post('/transactions/deposit', {
+    value: data.value,
+    type: 'depósito',
+    origin_account_id: data.origin_account_id,
+    dest_account_id: data.dest_account_id
+  })
+
+  return {
+    date: formateDate(dados.data.date),
+    description: dados.data.description,
+    dest_account_id: Number(dados.data.dest_account_id),
+    id: Number(dados.data.id),
+    origin_account_id: Number(dados.data.origin_account_id),
+    value: Number(dados.data.value)
   }
 }
 
@@ -133,13 +221,29 @@ export interface ICreateWithdrawResponse {
 }
 
 async function createWithdraw(data: ICreateWithdrawRequest): Promise<ICreateWithdrawResponse> {
-  return {
+  /* return {
     description: 'withdraw',
     value: 12,
     date: '22/02/2022',
     origin_account_id: 1,
     dest_account_id: 1,
     id: 2
+  } */
+
+  const dados = await api.post('/transactions/withdraw', {
+    value: Number(data.value),
+    type: 'saque',
+    origin_account_id: Number(data.origin_account_id),
+    dest_account_id: Number(data.dest_account_id),
+  })
+
+  return {
+    date: formateDate(dados.data.date),
+    description: dados.data.description,
+    dest_account_id: Number(dados.data.dest_account_id),
+    id: Number(dados.data.id),
+    origin_account_id: Number(dados.data.origin_account_id),
+    value: Number(dados.data.value)
   }
 }
 
@@ -177,7 +281,7 @@ export interface IGetTransactionResponse {
 }
 
 async function getTransaction(id: number): Promise<any> {
-  return {
+  /* return {
     id: 2,
     description: 'withdraw sent',
     value: 12,
@@ -195,7 +299,9 @@ async function getTransaction(id: number): Promise<any> {
       id: 1,
       user_id: 1
     }
-  }
+  } */
+  const dados = await api.get(`/transactions/${id}`)
+  return dados.data
 }
 
 ///////////////////////////////////
@@ -213,12 +319,20 @@ interface IGetUserResponse {
 }
 
 async function getUser(data: IGetUserRequest): Promise<IGetUserResponse> {
-  return {
+  /* return {
     id: 1,
     name: 'Anderson',
     email: 'andersonamericasul07@gmail.com',
     birthdate: '18/12/1995',
     cpf: '10831989475',
+  } */
+  const dados = await api.get('/users')
+  return {
+    birthdate: formateDate(dados.data.birthdate),
+    cpf: dados.data.cpf,
+    email: dados.data.email,
+    id: Number(dados.data.id),
+    name: dados.data.name
   }
 }
 
@@ -228,7 +342,7 @@ interface IGetAccountsRequest {
 
 }
 
-type IGetAccountsResponse = ({
+export type IGetAccountsResponse = ({
   id: number;
   account_number: string;
   agency: string;
@@ -239,7 +353,7 @@ type IGetAccountsResponse = ({
 })[]
 
 async function getAccounts(data: IGetAccountsRequest): Promise<IGetAccountsResponse> {
-  return [
+  /* return [
     {
       id: 1,
       account_number: '12345',
@@ -258,7 +372,33 @@ async function getAccounts(data: IGetAccountsRequest): Promise<IGetAccountsRespo
       balance: 2000,
       user_id: 1
     },
-  ]
+  ] */
+
+  const dados = await api.get('/accounts/user')
+
+  const retorno: ({
+    id: number;
+    account_number: string;
+    agency: string;
+    digit_agency_v: string;
+    digit_account_v: string;
+    balance: number;
+    user_id: number;
+  })[] = []
+
+  for(let i = 0; i < dados.data.length; i++) {
+    retorno.push({
+      account_number: dados.data[i].account_number,
+      agency: dados.data[i].agency,
+      balance: Number(dados.data[i].balance),
+      digit_account_v: dados.data[i].digit_account_v,
+      digit_agency_v: dados.data[i].digit_agency_v,
+      id: Number(dados.data[i].id),
+      user_id: Number(dados.data[i].user_id)
+    })
+  }
+
+  return retorno
 }
 
 ///////////////////////////////////////////
@@ -282,7 +422,7 @@ export interface ILoginResponse {
 }
 
 async function login(data: ILoginRequest): Promise<ILoginResponse> {
-  return {
+  /* return {
     token: '',
     account: {
       id: 1,
@@ -292,6 +432,23 @@ async function login(data: ILoginRequest): Promise<ILoginResponse> {
       digit_account_v: '2',
       balance: 0,
       user_id: 1
+    }
+  } */
+  const dados = await api.post('/auth/login', {
+    cpf: data.cpf,
+    password: data.password
+  })
+
+  return {
+    token: dados.data.token,
+    account: {
+      account_number: dados.data.account.account_number,
+      agency: dados.data.account.agency,
+      balance: Number(dados.data.account.balance),
+      digit_account_v: dados.data.account.digit_account_v,
+      digit_agency_v: dados.data.account.digit_agency_v,
+      id: Number(dados.data.account.id),
+      user_id: Number(dados.data.account.user_id)
     }
   }
 }
@@ -326,7 +483,7 @@ export interface ICreateAccountResponse {
 }
 
 async function createAccount(data: ICreateAccountRequest): Promise<ICreateAccountResponse> {
-  return {
+  /* return {
     user: {
       id: 1,
       birthdate: new Date(),
@@ -341,6 +498,31 @@ async function createAccount(data: ICreateAccountRequest): Promise<ICreateAccoun
       digit_account_v: '2',
       digit_agency_v: '2',
       user_id: 1
+    }
+  } */
+  const dados = await api.post('/auth/register', {
+    name: data.name,
+    email: data.email,
+    cpf: data.cpf,
+    password: data.password,
+    birthdate: data.birthdate
+  })
+
+  return {
+    account: {
+      account_number: dados.data.account.account_number,
+      agency: dados.data.account.agency,
+      balance: Number(dados.data.account.balance),
+      digit_account_v: dados.data.account.digit_account_v,
+      digit_agency_v: dados.data.account.digit_agency_v,
+      user_id: Number(dados.data.account.user_id)
+    },
+    user: {
+      birthdate: new Date(dados.data.user.birthdate),
+      cpf: dados.data.user.cpf,
+      email: dados.data.user.email,
+      id: Number(dados.data.user.id),
+      name: dados.data.user.name
     }
   }
 }
@@ -362,7 +544,7 @@ interface IGetAccountResponse {
 }
 
 async function getAccount(id: number): Promise<IGetAccountResponse> {
-  return {
+  /* return {
     account_number: '123456',
     agency: '1234',
     balance: 23,
@@ -370,6 +552,16 @@ async function getAccount(id: number): Promise<IGetAccountResponse> {
     digit_agency_v: '1',
     id: 2,
     user_id: 1
+  } */
+  const dados = await api.get(`/accounts/${id}`)
+  return {
+    account_number: dados.data.account_number,
+    agency: dados.data.agency,
+    balance: Number(dados.data.balance),
+    digit_account_v: dados.data.digit_account_v,
+    digit_agency_v: dados.data.digit_agency_v,
+    id: Number(dados.data.id),
+    user_id: Number(dados.data.user_id)
   }
 }
 
