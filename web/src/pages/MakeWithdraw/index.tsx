@@ -121,6 +121,7 @@ export const MakeWithdraw = () => {
               inputClassName={INPUT_TYPE_CLASSES.base}
               onChange={handleChange}
               errorMessage=''
+              disabled={true}
             />
           </div>
           <div className='w-[110px]'>
@@ -132,6 +133,7 @@ export const MakeWithdraw = () => {
               inputClassName={INPUT_TYPE_CLASSES.base}
               onChange={handleChange}
               errorMessage=''
+              disabled={true}
             />
           </div>
         </div>

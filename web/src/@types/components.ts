@@ -8,6 +8,7 @@ export interface InputProps {
   errorMessage: string;
   inputClassName: string;
   placeholder?: string;
+  disabled?: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

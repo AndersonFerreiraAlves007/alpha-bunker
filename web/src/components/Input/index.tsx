@@ -7,9 +7,8 @@ export const INPUT_TYPE_CLASSES = {
 }
 
 const base = {
-  input: "block px-2.5 pb-2.5 pt-4 w-full text-sm text-[#353535] !h-[33px] bg-input-readonly rounded-lg border-2\
-  border-[#d2d2d2] appearance-none dark:text-[#727272] dark:border-gray-600 dark:focus:border-[#3FA7B8] focus:outline-none focus:ring-0 focus:border-[#3FA7B8] peer",
-  label: "absolute text-sm text-[#353535] dark:text-input-placeholder duration-300 transform:-translate-y-4 transform:scale-75 top-2 z-10 origin-[0] dark:bg-transparent px-2 peer-focus:px-2 peer-focus:text-[#338896] peer-focus:dark:text-[353535] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1",
+  input: "block p-4 w-full text-sm appearance-none focus:outline-none bg-transparent dark:bg-transparent text-input-text !h-[33px]",
+  label: "absolute top-0 text-sm text-brand bg-transparent p-1 -z-1 duration-300 origin-0 text-sm",
   span: "block w-full invisible"
 }
 
@@ -27,10 +26,10 @@ const getInputClasses = (inputClassName = INPUT_TYPE_CLASSES.base) => ({
 }[inputClassName]);
 
 const Input: React.FC<InputProps> = (props) => {
-  const { name, type, value, onChange, inputClassName, errorMessage, label } = props;
+  const { name, type, value, onChange, inputClassName, errorMessage, label, disabled } = props;
   const inputClasses = getInputClasses(inputClassName);
   return (
-    <div className="relative">
+    <div className="outline relative border-2 focus-within:border-[#338896] rounded-lg px-2.5 pb-2.5 !h-[33px]">
       <input
         className={inputClasses.input}
         id={name}
@@ -38,7 +37,8 @@ const Input: React.FC<InputProps> = (props) => {
         type={type}
         value={value}
         onChange={onChange}
-        placeholder=""
+        placeholder=" "
+        disabled={disabled}
       />
       <label htmlFor={name} className={inputClasses.label}>
         {label}

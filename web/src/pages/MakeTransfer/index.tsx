@@ -160,6 +160,7 @@ export const MakeTransfer = () => {
               inputClassName={INPUT_TYPE_CLASSES.base}
               onChange={() => {}}
               errorMessage=""
+              disabled={true}
             />
           </div>
           <div className="w-[110px]">
@@ -171,6 +172,7 @@ export const MakeTransfer = () => {
               inputClassName={INPUT_TYPE_CLASSES.base}
               onChange={() => {}}
               errorMessage=""
+              disabled={true}
             />
           </div>
         </div>

@@ -1,8 +1,16 @@
 /** @type {import('tailwindcss').Config} */;
 module.exports = {
   content: ['./src/**/*.tsx'],
+  variants: ['responsive', 'hover', 'focus', 'focus-within'],
+  darkMode: 'class',
   theme: {
     extend: {
+      transformOrigin: {
+        "0": "0%",
+      },
+      zIndex: {
+        '-1': '-1',
+      },
       fontFamily: {
         brand: ['Inter'],
       },

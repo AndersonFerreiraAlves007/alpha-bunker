@@ -12,9 +12,6 @@ function formatBalance(value: number) {
 const BalanceLabel: FC<BalanceLabelProps> = () => {
   const { user } = useUser()
 
-  console.log('asasasas')
-  console.log(user)
-
   const agency = user ? user.account.agency : ''
   const digitAgencyV = user ? user.account.digit_agency_v : ''
   const accountNumber = user ? user.account.account_number : ''

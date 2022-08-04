@@ -18,10 +18,7 @@ const ProfileHeader = () => {
   const name = user ? user.name : ''
 
   const src = 'https://avatars3.githubusercontent.com/u/527058?s=460&v=4'
-/*   const data = {
-    name: 'Tiaguchi ',
-    src: 'https://avatars3.githubusercontent.com/u/527058?s=460&v=4',
-  }; */
+
   return (
     <div className="flex flex-col bg-[#337782] w-[360px] h-[207px] rounded-b-3xl items-center absolute top-0">
       <div className="w-full mt-5 px-[15px] justify-between flex">

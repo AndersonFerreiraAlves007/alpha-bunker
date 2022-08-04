@@ -97,7 +97,7 @@ const ListTransactionsExtract: FC<ListTransactionsExtractProps> = ({
   daysTransactions
 }) => {
   return (
-    <div className='border-[1px] w-[320px] bg-white dark:bg-transparent dark:border-[#424245] absolute top-[270px] rounded-xl p-3.5 '>
+    <div className='border-[1px] w-[320px] bg-white dark:bg-transparent absolute dark:border-[#424245] border-[1px] top-[270px] rounded-xl p-3.5 '>
       <div className='flex items-center justify-between'>
         <div className='flex items-center'>
           <span><Bank size={24} color="#c98e36" /></span>

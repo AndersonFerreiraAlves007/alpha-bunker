@@ -139,25 +139,28 @@ const TransactionVoucher: React.FC<TransactionVoucherProps> = ({
   const data = formateDate(transaction.date);
   const valor = Number(transaction.value);
   return (
-    <div>
-      <div>
-        <Receipt />
-        <h2>Comprovante de transação</h2>
+    <div className='w-[300px] rounded-xl p-3.5 mt-[200px] border-[1px] dark:border-[#424245] bg-white dark:bg-transparent'>
+      <div className='w-full flex'>
+        <Receipt size={24} color="#c98e36" />
+        <h2 className='text-header-gold ml-1 font-medium'>Comprovante de transação</h2>
       </div>
-      <div>
-        <h2>Tipo: {label}</h2>
-        <p>Data: {data}</p>
+      <div className='dark:bg-transparent rounded-xl bg-[#F3F9F9] mt-[20px] p-3'>
+        <h2 className='text-[#727272]'>Tipo: {label}</h2>
+        <p className='text-[#A1A1A1] my-2'>Data: {data}</p>
         {is_transfer && (
           <>
-            <h2>{!is_origin ? 'Dados de destino:' : 'Dados de origin:'}</h2>
-            <p>Nome: {nome}</p>
-            <p>Agência: {`${agency}-${digit_agency_v}`}</p>
-            <p>Conta: {`${account_number}-${digit_account_v}`}</p>
+            <h2 className='text-[#727272]'>{!is_origin ? 'Dados de destino:' : 'Dados de origin:'}</h2>
+            <p className='text-[#A1A1A1] ml-[10px]'>Nome: {nome}</p>
+            <p className='text-[#A1A1A1] ml-[10px]'>Agência: {`${agency}-${digit_agency_v}`}</p>
+            <p className='text-[#A1A1A1] ml-[10px]'>Conta: {`${account_number}-${digit_account_v}`}</p>
           </>
         )}
-        <p className={prefix === '-' ? 'text-[#FF5959]' : 'text-[#53D496]'}>{`${
+        <div className='flex justify-between mt-[7px]'>
+          <h2 className='text-[#727272]'>Valor</h2>
+        <p className={prefix === '-' ? 'text-[#FF5959] font-medium' : 'text-[#53D496] font-medium'}>{`${
           prefix === '-' ? '- ' : '+ '
         }${formatMoeda(valor)}`}</p>
+        </div>
       </div>
     </div>
   );
