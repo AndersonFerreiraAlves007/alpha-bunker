@@ -13,14 +13,14 @@ const ProfileHeader = () => {
   const name = user ? user.name : ''
 
   return (
-    <div className="flex flex-col bg-[#337782] w-[360px] h-[207px] rounded-b-3xl items-center">
-      <span>{`Bem-vindo, ${name}`}</span>
-      <div>
+    <div className="flex flex-col bg-[#337782] w-full h-[207px] rounded-b-3xl items-center absolute top-0">
+      <div className='flex mt-[20px] justify-between items-center w-[300px] mb-[28.18px]'>
+        <span className='text-xl font-medium text-header-light'>{`Bem-vindo, ${name}`}</span>
         <Link to={'/profile'}>
-          <UserCircle size={32} />
+          <UserCircle size={25} color={'#FFFFFF'}/>
         </Link>
       </div>
-      <Navbar/>
+      <Navbar />
     </div>
   );
 };

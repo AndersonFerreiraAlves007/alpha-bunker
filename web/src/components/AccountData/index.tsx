@@ -14,8 +14,8 @@ const AccountData: React.FC<AccountProps> = ({ agencia, conta }) => {
   const account = format(conta);
 
   return (
-    <div className="flex flex-col bg-[#F3F9F9] rounded w-[284px] gap-y-[5px] pl-[5px]">
-      <p>Agência: {agency}</p>
+    <div className="flex flex-col border-[1px] text-[#727272] dark:text-[#A1A1A1] bg-[#F3F9F9] font-medium dark:font-normal dark:bg-transparent text-[13.5px] dark:border-[#424245] rounded w-[275px] gap-y-[5px] p-[5px]">
+      <p className="mb-[-8px]">Agência: {agency}</p>
       <p>Conta: {account}</p>
     </div>
   );

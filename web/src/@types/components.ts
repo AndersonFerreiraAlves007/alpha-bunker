@@ -4,6 +4,7 @@ export interface InputProps {
   name: string;
   type: string;
   value: string;
+  label: string;
   errorMessage: string;
   inputClassName: string;
   placeholder?: string;

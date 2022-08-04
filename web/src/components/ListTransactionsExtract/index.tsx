@@ -69,14 +69,14 @@ const DayTransactions: FC<DayTransactionsProps> = ({
   }
 
   return (
-    <div>
-      <h2>{day}</h2>
-      <div>
+    <div className='bg-[#F3F9F9] dark:bg-transparent p-2 dark:p-0 mt-[20px] rounded-sm' >
+      <h2 className='text-[#727272] font-medium'>{day}</h2>
+      <div className='ml-[8px]'>
         {transactions.map((item: any) => {
           const { color, label, prefix } = getLabelTransaction(item.type)
           return <div className='flex justify-between'>
-            <span style={{ color: 'black' }}>{label}</span>
-            <span className={prefix === '-' ? 'text-[#FF5959]' : 'text-[#53D496]'}>{`${prefix === '-' ? '- ' : '+ '}${formatMoeda(item.value)}`}</span>
+            <span className='text-[#A1A1A1] text-[15px]'>{label}</span>
+            <span className={prefix === '-' ? 'text-[#FF5959] font-medium' : 'text-[#53D496] font-medium'}>{`${prefix === '-' ? '- ' : '+ '}${formatMoeda(item.value)}`}</span>
           </div>
       })}
       </div>
@@ -92,13 +92,13 @@ const ListTransactionsExtract: FC<ListTransactionsExtractProps> = ({
   daysTransactions
 }) => {
   return (
-    <div>
-      <div className='flex items-center'>
+    <div className='border-[1px] w-[320px] bg-white dark:bg-transparent dark:border-[#424245] rounded-xl p-3.5 mt-[80px]'>
+      <div className='flex items-center justify-between'>
         <div className='flex items-center'>
-          <span><Bank size={32} /></span>
-          <span>Extrato de transações</span>
+          <span><Bank size={24} color="#c98e36" /></span>
+          <span className='text-header-gold ml-1 font-medium ml-[10px]'>Extrato de transações</span>
         </div>
-        <span><Bell size={32} /></span>
+        <span><Bell size={17} color="#777777" weight='bold' /></span>
       </div>
       {
         daysTransactions.map((item: any) => <DayTransactions day={item.date} transactions={item.transactions}/>)

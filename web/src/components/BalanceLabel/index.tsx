@@ -22,18 +22,16 @@ const BalanceLabel: FC<BalanceLabelProps> = () => {
   const balance = user ? user.account.balance : 0
 
   return (
-    <div>
-      <div className='flex items-center'>
-        <div className='flex items-center'>
-          <span className='text-[#C98E26]'>{`Agência: ${agency}-${digitAgencyV}`}</span>
-          <span className='text-[#C98E26]'>{`Conta: ${accountNumber}-${digitAccountV}`}</span>
-        </div>
-        <span><CaretDown size={32} color="#777777" weight="fill" /></span>
+    <div className='w-[280px] bg-white rounded-lg absolute top-[162.56px] font-medium h-[73.04px]'>
+      <div className='flex items-center justify-between	 mx-4 mt-[9px]'>
+        <span className='text-[#C98E26] text-sm'>{`Agência: ${agency}-${digitAgencyV}`}</span>
+        <span className='text-[#C98E26] text-sm'>{`Conta: ${accountNumber}-${digitAccountV}`}</span>
+        <span><CaretDown size={20} color="#777777" weight={'bold'}/></span>
       </div>
-      <div className='flex items-center'>
-        <span><Eye size={32} /></span>
-        <span>{formatBalance(balance)}</span>
-        <span>R$</span>
+      <div className='flex items-center mx-4 mt-[2px]'>
+        <span><Eye size={15} color="#777777" weight={'bold'} /></span>
+        <span className='text-2xl text-[#338896] font-bold mx-[5px]'>{formatBalance(balance)}</span>
+        <span className='text-[#3FA7B8] text-sm font-bold mt-[5px]'>R$</span>
       </div>
     </div>
   )

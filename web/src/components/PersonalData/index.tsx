@@ -10,14 +10,14 @@ const PersonalData: React.FC = () => {
   const birthdate = user ? user.birthDate : ''
 
   return (
-    <div className="flex justify-start items-center">
-      <div className="bg-blue-400 flex justify-center items-center w-14 h-12 rounded">
-        <IdentificationCard size={16} color="#c98e26" alt="dados pessoais" />
-        <h2>Meus Dados</h2>
+    <div className="flex justify-start items-center mt-[200px] bg-white dark:bg-transparent p-3 border-[1px] rounded-xl dark:border-[#424245] w-[300px] flex-col">
+      <div className="flex w-full items-center text-[#C98E26] rounded mb-[20px]">
+        <IdentificationCard size={20} color="#c98e26" alt="dados pessoais" />
+        <h2 className='ml-[5px] text-[15px]'>Meus dados</h2>
       </div>
-      <div>
+      <div className='w-full  text-[#727272] dark:text-[#A1A1A1] dark:p-0 dark:bg-transparent bg-[#F3F9F9] p-2 dark:font-normal font-medium text-[13.5px]'>
         <p>Nome: {name}</p>
-        <p>Data de Nascimento: {birthdate}</p>
+        <p className='my-[-5px]'>Data de Nascimento: {birthdate}</p>
         <p>CPF: {cpf}</p>
       </div>
     </div>

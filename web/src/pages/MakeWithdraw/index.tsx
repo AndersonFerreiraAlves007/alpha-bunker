@@ -5,7 +5,7 @@ import { Modal } from '../../components/ModalConfirmTransaction';
 import BalanceLabel from '../../components/BalanceLabel'
 import Navbar from '../../components/Navbar'
 import AppHeader from '../../components/AppHeader'
-import { DownloadSimple  } from "phosphor-react"
+import { UploadSimple  } from "phosphor-react"
 import { createWithdraw } from '../../libs/api'
 import { useNavigate } from "react-router-dom";
 import { useUser } from '../../providers/UserProvider'
@@ -95,44 +95,51 @@ export const MakeWithdraw = () => {
 
   return (
     <>
-      <AppHeader/>
+      <AppHeader />
       {/* <Navbar/> */}
       <BalanceLabel />
       {modal && (
         <Modal
-          title="Saque"
+          title="Depósito"
           setModal={setModal}
           handleConfirmModal={handleWithdraw}
         />
       )}
-      <div className="flex flex-col gap-5 border-solid border-[1px] rounded-xl !border-input-border w-[330px] h-[370px] p-4">
+      <div className="flex flex-col gap-5 border-solid mt-[230px] border-[1px] bg-white dark:bg-transparent rounded-xl dark:border-[#424245] w-[280px] h-[289px] p-3.5">
         <div className='flex'>
-          <DownloadSimple  size={24} color="#c98e36" />
-          <h3 className='text-header-gold ml-1'>Saque</h3>
+          <UploadSimple size={24} color="#c98e36" />
+          <h3 className='text-header-gold ml-1 font-medium'>Saque</h3>
         </div>
-        <p className='text-input-base'>Dados para o saque</p>
+        <p className='text-input-base mt-[-12px] mb-[-10px] text-black dark:text-[#F7F7F7]'>Dados para o saque</p>
         <div className='flex justify-between'>
-          <Input
-            name='agencia'
-            type='text'
-            value={agency}
-            inputClassName={INPUT_TYPE_CLASSES.base}
-            onChange={handleChange}
-            errorMessage=''
-          />
-          <Input
-            name='conta'
-            type='text'
-            value={account}
-            inputClassName={INPUT_TYPE_CLASSES.base}
-            onChange={handleChange}
-            errorMessage=''
-          />
+          <div className='w-[110px]'>
+            <Input
+              name='agencia'
+              type='text'
+              label=''
+              value={agency}
+              inputClassName={INPUT_TYPE_CLASSES.base}
+              onChange={handleChange}
+              errorMessage=''
+            />
+          </div>
+          <div className='w-[110px]'>
+            <Input
+              name='conta'
+              type='text'
+              label=''
+              value={account}
+              inputClassName={INPUT_TYPE_CLASSES.base}
+              onChange={handleChange}
+              errorMessage=''
+            />
+          </div>
         </div>
         <div className='w-full flex justify-between flex-col h-[110px]'>
           <Input
             name='valor'
             type='text'
+            label='Valor'
             value={formData.valor}
             inputClassName={INPUT_TYPE_CLASSES.base}
             onChange={handleChange}
@@ -141,13 +148,14 @@ export const MakeWithdraw = () => {
           <Input
             name='senha'
             type='text'
+            label='Senha'
             value={formData.senha}
             inputClassName={INPUT_TYPE_CLASSES.base}
             onChange={handleChange}
             errorMessage=''
           />
         </div>
-        <button className='bg-btn-primary-base rounded-md h-[50px]' onClick={submit}>
+        <button className='bg-btn-primary-base rounded-md h-[55px] text-[#FFFFFF]' onClick={submit}>
           Sacar
         </button>
       </div>

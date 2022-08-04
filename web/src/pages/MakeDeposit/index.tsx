@@ -5,7 +5,7 @@ import { Modal } from '../../components/ModalConfirmTransaction';
 import BalanceLabel from '../../components/BalanceLabel'
 import Navbar from '../../components/Navbar'
 import AppHeader from '../../components/AppHeader'
-import { UploadSimple } from "phosphor-react"
+import { DownloadSimple } from "phosphor-react"
 import { useUser } from '../../providers/UserProvider'
 import { createDeposit } from '../../libs/api'
 import { useNavigate } from "react-router-dom";
@@ -32,14 +32,14 @@ export const MakeDeposit = () => {
     try {
       const {
         id
-       } = await createDeposit({
-          dest_account_id: user?.account.id || 0,
-          origin_account_id: user?.account.id || 0,
-          type: 'deposit',
-          value: Number(formData.valor)
-       })
-       await updateBalance()
-       navigate(`/transaction/${id}`)
+      } = await createDeposit({
+        dest_account_id: user?.account.id || 0,
+        origin_account_id: user?.account.id || 0,
+        type: 'deposit',
+        value: Number(formData.valor)
+      })
+      await updateBalance()
+      navigate(`/transaction/${id}`)
     } catch (error) {
       console.log(error);
     }
@@ -47,7 +47,7 @@ export const MakeDeposit = () => {
 
   function validateValue() {
     let error = ''
-    if(Number.isNaN(Number(formData.valor)) || Number(formData.valor) <= 0) {
+    if (Number.isNaN(Number(formData.valor)) || Number(formData.valor) <= 0) {
       error = 'Valor inválido!'
     }
     return error
@@ -55,10 +55,10 @@ export const MakeDeposit = () => {
 
   function validatePassword() {
     let error = ''
-    if(formData.senha.length < 3) {
+    if (formData.senha.length < 3) {
       error = 'A senha deve ter no mínimo e caracteres.'
     } else {
-      if(formData.senha.length > 10) {
+      if (formData.senha.length > 10) {
         error = 'A senha deve ter no máximo 10 caracteres.'
       }
     }
@@ -74,7 +74,7 @@ export const MakeDeposit = () => {
   }
 
   function getHasError(errors: any) {
-    for(let i = 0; i < errors.length; i++) if(errors[i]) return true
+    for (let i = 0; i < errors.length; i++) if (errors[i]) return true
     return false
   }
 
@@ -82,7 +82,7 @@ export const MakeDeposit = () => {
   const hasError = getHasError(erros)
 
   function submit() {
-    if(hasError) {
+    if (hasError) {
       console.log('Tem erros')
     } else {
       setModal(true)
@@ -94,7 +94,7 @@ export const MakeDeposit = () => {
 
   return (
     <>
-      <AppHeader/>
+      <AppHeader />
       {/* <Navbar/> */}
       <BalanceLabel />
       {modal && (
@@ -104,34 +104,41 @@ export const MakeDeposit = () => {
           handleConfirmModal={handleDeposit}
         />
       )}
-      <div className="flex flex-col gap-5 border-solid border-[1px] rounded-xl !border-input-border w-[330px] h-[370px] p-4">
+      <div className="flex flex-col gap-5 bg-white border-solid dark:bg-transparent mt-[230px] border-[1px] rounded-xl dark:border-[#424245] w-[280px] h-[289px] p-3.5">
         <div className='flex'>
-          <UploadSimple size={24} color="#c98e36" />
-          <h3 className='text-header-gold ml-1'>Depósito</h3>
+          <DownloadSimple size={24} color="#c98e36" />
+          <h3 className='text-header-gold ml-1 font-medium'>Depósito</h3>
         </div>
-        <p className='text-input-base'>Dados para o depósito</p>
+        <p className=' mt-[-12px] mb-[-10px] text-[#353535] dark:text-[#F7F7F7]'>Dados para o depósito</p>
         <div className='flex justify-between'>
-          <Input
-            name='agencia'
-            type='text'
-            value={agency}
-            inputClassName={INPUT_TYPE_CLASSES.base}
-            onChange={handleChange}
-            errorMessage=''
-          />
-          <Input
-            name='conta'
-            type='text'
-            value={account}
-            inputClassName={INPUT_TYPE_CLASSES.base}
-            onChange={handleChange}
-            errorMessage=''
-          />
+          <div className='w-[110px]'>
+            <Input
+              name='agencia'
+              type='text'
+              label=''
+              value={agency}
+              inputClassName={INPUT_TYPE_CLASSES.base}
+              onChange={handleChange}
+              errorMessage=''
+            />
+          </div>
+          <div className='w-[110px]'>
+            <Input
+              name='conta'
+              type='text'
+              label=''
+              value={account}
+              inputClassName={INPUT_TYPE_CLASSES.base}
+              onChange={handleChange}
+              errorMessage=''
+            />
+          </div>
         </div>
         <div className='w-full flex justify-between flex-col h-[110px]'>
           <Input
             name='valor'
             type='text'
+            label='Valor'
             value={formData.valor}
             inputClassName={INPUT_TYPE_CLASSES.base}
             onChange={handleChange}
@@ -140,13 +147,14 @@ export const MakeDeposit = () => {
           <Input
             name='senha'
             type='text'
+            label='Senha'
             value={formData.senha}
             inputClassName={INPUT_TYPE_CLASSES.base}
             onChange={handleChange}
             errorMessage=''
           />
         </div>
-        <button className='bg-btn-primary-base rounded-md h-[50px]' onClick={submit}>
+        <button className='bg-btn-primary-base rounded-md h-[55px] text-[#FFFFFF]' onClick={submit}>
           Depositar
         </button>
       </div>
